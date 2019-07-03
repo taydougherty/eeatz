@@ -1,0 +1,4 @@
+DROP DATABASE IF EXISTS eeatz;
+CREATE DATABASE eeatz;
+
+USE eeatz;
