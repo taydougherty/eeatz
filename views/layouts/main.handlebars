@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="#" type="text/css" />
+    <title>EEATZ</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -19,28 +19,54 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="#"></script>
-    <title>Quotes App</title>
+    <script src="https://kit.fontawesome.com/036763e8d5.js"></script>
+    <!-- More bootstrap  -->
+    <link href="assets/css/toolkit-inverse.css" rel="stylesheet">
+    <link href="assets/css/application.css" rel="stylesheet">
+    <!-- More bootstrap ends -->
 </head>
 
 <body>
-    <div class="pos-f-t">
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">
-                <h5 class="text-white h4">Collapsed content</h5>
-                <span class="text-muted">Toggleable via the navbar brand.</span>
+    <!-- Nav -->
+    <div class="with-iconav">
+        <nav class="iconav">
+            <div class="iconav-slider">
+                <ul class="nav nav-pills iconav-nav flex-md-column">
+                    <li class="text-center" style="background-color:#2C7D95; padding-top:5px;">
+                        <a class="nav-link" href="/" title="Home" data-toggle="tooltip" data-placement="right"
+                            data-container="body">
+                            <span><i class="fas fa-home"></i></span>
+                            <small class="iconav-nav-label">Home</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Add More" data-toggle="tooltip" data-placement="right"
+                            data-container="body">
+                            <span><i class="fas fa-clipboard-list"></i></span>
+                            <small class="iconav-nav-label">Add</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="History" data-toggle="tooltip" data-placement="right"
+                            data-container="body">
+                            <span><i class="fas fa-receipt"></i></span>
+                            <small class="iconav-nav-label">History</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" title="Log Out" data-toggle="tooltip" data-placement="right"
+                            data-container="body">
+                            <span><i class="fas fa-sign-out-alt"></i></span>
+                            <small class="iconav-nav-label">Log Out</small>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
         </nav>
-    </div>
-    <div class="container">
-        {{{ body }}}
+        <!-- Nav ends -->
+        <div class="container">
+            {{{ body }}}
+        </div>
     </div>
 </body>
 
