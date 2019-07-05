@@ -1,65 +1,106 @@
-{{!-- Expenses Form --}}
-<div class="form_expenses">
-    <h3>Expenses</h3>
-    <form class="needs-validation" novalidate>
-        <div class="col-md-6 mb-3">
-            <label for="validationTooltip03">Department Name</label>
-            <input type="text" class="form-control" id="validationTooltip03" placeholder="Department Name" required>
-            <div class="invalid-tooltip">
-                Please provide department name
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <label for="validationTooltip04">Expense Name</label>
-            <input type="text" class="form-control" id="validationTooltip04" placeholder="Expense Name" required>
-            <div class="invalid-tooltip">
-                Please provide a expense name.
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <label for="validationTooltip05">Expense Cost</label>
-            <input type="text" class="form-control" id="validationTooltip05" placeholder="Expense Cost" required>
-            <div class="invalid-tooltip">
-                Please provide a expense cost.
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <label for="validationTooltip06">Expiration Date</label>
-            <input type="text" class="form-control" id="validationTooltip06" placeholder="Expiration Date" required>
-            <div class="invalid-tooltip">
-                Please provide a expiration date.
-            </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
+<div class="text-center mb-5">
+    <a href="/"><img src="images/logo.png" width="200px" alt=""></a>
 </div>
 
+<div class="container">
 
-{{!-- Budget Form --}}
-<div class="form_budget">
-    <h3>Budget</h3>
-    <form class="needs-validation" novalidate>
-        <div class="col-md-6 mb-3">
-            <label for="validationTooltip03">Department Name</label>
-            <input type="text" class="form-control" id="validationTooltip03" placeholder="Department Name" required>
-            <div class="invalid-tooltip">
-                Please provide department name
+
+    <ul class="nav nav-bordered mt-4 mt-md-2 mb-0 clearfix" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a href="#budget" class="nav-link active" role="tab" data-toggle="tab" aria-controls="budget">BUDGET</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a href="#expenses" class="nav-link" role="tab" data-toggle="tab" aria-controls="expenses">EXPENSES</a>
+        </li>
+    </ul>
+
+    <hr class="mt-0 mb-5">
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="budget">
+
+            <!-- Budget Form -->
+            <div class="container">
+                <div role="tabpanel" class="tab-pane" id="budget">
+                    <div class="form_budget">
+
+                        <div class="col-md-12 text-center">
+                            <h4 class="dark-grey mb-4">BUDGET</h4>
+
+                            <!-- Department Name -->
+                            <div id="departmentName-form" class="form-group col-lg-12">
+                                <input placeholder="Department Name" type="" name="" class="form-control"
+                                    id="departmentName-input" value="">
+                                <small id="departmentName-feedback" class=""></small>
+                            </div>
+                            <!-- Budget Amount -->
+                            <div id="budgetAmount-form" class="form-group col-lg-12">
+                                <input placeholder="Budget Amount" type="number" name="" class="form-control"
+                                    id="budgetAmount-input" value="">
+                                <small id="budgetAmount-feedback" class=""></small>
+                            </div>
+
+                            <!-- Expiration Date -->
+                            <div id="expirationDate-form" class="form-group col-lg-12">
+                                <input placeholder="Expiration Date" type="date" name="" class="form-control"
+                                    id="expirationDate-input" value="">
+                                <small id="expirationDate-feedback" class=""></small>
+                            </div>
+
+                            <!-- Budget Amount -->
+                            <div id="budgetAmount-form" class="form-group col-lg-12">
+                                <input placeholder="Budget Amount" type="number" name="" class="form-control"
+                                    id="budgetAmount-input" value="">
+                                <small id="budgetAmount-feedback" class=""></small>
+                            </div>
+                            <button type="submit" class="btn btn-primary signup" style="width:97%;">Submit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3 mb-3">
-            <label for="validationTooltip04">Budget Amount</label>
-            <input type="text" class="form-control" id="validationTooltip04" placeholder="Budget Amount" required>
-            <div class="invalid-tooltip">
-                Please provide a amount.
+
+        <div role="tabpanel" class="tab-pane" id="expenses">
+
+            <!-- Expenses Form -->
+            <div class="container">
+                <div role="tabpanel" class="tab-pane active" id="expenses">
+                    <div class="form_expenses">
+                        <div class="col-md-12 text-center">
+                            <h4 class="dark-grey mb-4">EXPENSES</h4>
+
+                            <!-- Department Name -->
+                            <div id="departmentName-form" class="form-group col-lg-12">
+                                <input placeholder="Department Name" type="" name="" class="form-control"
+                                    id="departmentName-input" value="">
+                                <small id="departmentName-feedback" class=""></small>
+                            </div>
+                            <!-- Budget Amount -->
+                            <div id="expenseName-form" class="form-group col-lg-12">
+                                <input placeholder="Expense Name" type="number" name="" class="form-control"
+                                    id="expenseName-input" value="">
+                                <small id="expenseName-feedback" class=""></small>
+                            </div>
+
+                            <!-- Expiration Date -->
+                            <div id="expenseCost-form" class="form-group col-lg-12">
+                                <input placeholder="Expense Cost" type="number" name="" class="form-control"
+                                    id="expenseCost-input" value="">
+                                <small id="expenseCost-feedback" class=""></small>
+                            </div>
+
+                            <!-- Budget Amount -->
+                            <div id="expirationDate-form" class="form-group col-lg-12">
+                                <input placeholder="Expiration Date" type="number" name="" class="form-control"
+                                    id="expirationDate-input" value="">
+                                <small id="expirationDate-feedback" class=""></small>
+                            </div>
+                            <button type="submit" class="btn btn-primary signup" style="width:97%;">Submit</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-3 mb-3">
-            <label for="validationTooltip06">Expiration Date</label>
-            <input type="text" class="form-control" id="validationTooltip06" placeholder="Expiration Date" required>
-            <div class="invalid-tooltip">
-                Please provide a expiration date.
-            </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
+
+    </div>
 </div>
