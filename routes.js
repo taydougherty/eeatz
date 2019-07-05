@@ -1,8 +1,12 @@
 module.exports = function(app){
 
   const application = require('./routes/application');
-  const users = require('./routes/users');
+  const add = require('./routes/add');
+  const home = require('./routes/home');
+  const history = require('./routes/history');
 
   app.use('/', application);
-  app.use('/users', users);
+  app.use('/add', add);
+  app.use('/home', home);
+  app.use('/history', history);
 }
