@@ -20,7 +20,7 @@ module.exports = {
       dateExpired: {
         type: Sequelize.DATE
       },
-      userId: {
+      username: {
         type: Sequelize.STRING
       },
       createdAt: {

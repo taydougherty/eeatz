@@ -20,7 +20,7 @@ module.exports = {
       dateOccurred: {
         type: Sequelize.DATE
       },
-      userId: {
+      username: {
         type: Sequelize.STRING
       },
       createdAt: {

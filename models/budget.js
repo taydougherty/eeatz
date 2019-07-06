@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     budgetTotal: DataTypes.INTEGER,
     dateStart: DataTypes.DATE,
     dateExpired: DataTypes.DATE,
-    userId: DataTypes.STRING
+    username: DataTypes.STRING
   }, {});
   budget.associate = function(models) {
     // associations can be defined here
