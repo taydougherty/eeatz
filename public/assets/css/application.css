@@ -4,9 +4,30 @@ body {
   padding-bottom: 20px;
 }
 
- /* fix input color */
+/* display placeholder date msg */
+input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #6c757d;
+  margin-right: 0.25em;
+}
+input[type="date"]:focus:before,
+input[type="date"]:valid:before {
+  content: "";
+}
+
+ /* fix input placeholder color */
  input[type=date] {
   color:#6c757d;
+}
+
+/* fix select placeholder color */
+.placeholder_color {
+  color:#6c757d;
+}
+
+/* Hide subcategory input */
+.display_node {
+  display: none;
 }
 
 @media (min-width: 768px) {
