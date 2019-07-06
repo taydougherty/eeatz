@@ -1,7 +1,10 @@
 $(document).ready(function () {
   // Getting references to our form and input
   var signUpButton = $(".signup");
+  var firstnameInput = $("input#firstname-input");
+  var lastnameInput = $("input#lastname-input");
   var usernameInput = $("input#username-input");
+  var restaurantInput = $("input#restaurant-input");
   var emailInput = $("input#email-input");
   var passwordInput = $("input#password-input");
 
@@ -50,6 +53,30 @@ $(document).ready(function () {
 
       $("#lastname-form").addClass("has-success");
       $("#lastname-feedback").text("Last name valid!");
+    }
+  });
+
+  // Dropdown for which restaurant user is associated with
+  $.get("route", {
+
+  }).then(function (data) {
+    data.forEach(element => {
+      $(".restaurant").append("<a class='dropdown - item' href='#'>" + element + "</a>")
+    });
+  })
+
+  // Restaurant "on-the-fly" validation
+  restaurantInput.bind('input propertychange', function () {
+    if (restaurantInput.val().trim().length < 1) {
+      $("#restaurant-form").removeClass("has-success");
+
+      $("#restaurant-form").addClass("has-error");
+      $("#restaurant-feedback").text("Please enter a valid restaurant name");
+    } else {
+      $("#restaurant-form").removeClass("has-error");
+
+      $("#restaurant-form").addClass("has-success");
+      $("#restaurant-feedback").text("Restaurant name valid!");
     }
   });
 
@@ -133,6 +160,7 @@ $(document).ready(function () {
     signUpUser(userData.username, userData.email, userData.password);
     firstnameInput.val("");
     lastnameInput.val("");
+    restaurantInput.val("");
     emailInput.val("");
     passwordInput.val("");
     usernameInput.val("");
@@ -158,5 +186,10 @@ $(document).ready(function () {
       console.log(err);
     });
   }
+
+  // if click on addnew for restaurants display none for div with class restaurant
+  // on submit check if div with class restaurant display === none
+  // if yes, then use addnew input as restaurant value
+  // else, find dropdown item value that is selected
 
 });
