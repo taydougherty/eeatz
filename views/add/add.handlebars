@@ -23,8 +23,8 @@
                 <div role="tabpanel" class="tab-pane" id="budget">
                     <div class="form_budget">
 
-                        <div class="col-md-12 text-center">
-                            <h4 class="dark-grey mb-4">BUDGET</h4>
+                        <div class="col-md-12">
+                            <h4 class="dark-grey mb-4 text-center">BUDGET</h4>
 
                             <!-- Department Name -->
                             <div id="departmentNameB-form" class="form-group col-lg-12">
@@ -35,39 +35,42 @@
                                     <option>example_3</option>
                                     <option>Add More</option>
                                 </select>
-                                <small id="departmentName-feedback" class=""></small>
+                                <small id="departmentNameB-feedback" class="inv_feedback"></small>
                             </div>
 
                             <!-- addCategoryNameB display none -->
                             <div id="addCategoryNameB-form" class="form-group col-lg-12 display_node">
                                 <input placeholder="Add Department Name" type="text" class="form-control"
                                     id="addCategoryNameB-input" value="">
-                                <small id="addCategoryNameB-feedback" class=""></small>
+                                <small id="addCategoryNameB-feedback" class="inv_feedback"></small>
                             </div>
 
                             <!-- Budget Amount -->
                             <div id="budgetAmountB-form" class="form-group col-lg-12">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mr-1 text-light" id="inputGroupPrepend"><i
+                                    <span class="input-group-text mr-1 placeholder_color" id="inputGroupPrepend"><i
                                             class="fas fa-dollar-sign fa-xl"></i></span>
-                                    <input placeholder="Budget Amount" aria-describedby="inputGroupPrepend"
-                                        type="" class="form-control comma" id="budgetAmountB-input" value="">
+                                    <input pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
+                                        placeholder="Budget Amount" aria-describedby="inputGroupPrepend" type=""
+                                        class="form-control comma" id="budgetAmountB-input" value="">
                                 </div>
-                                <small id="budgetAmountB-feedback" class=""></small>
+                                <small id="budgetAmountB-feedback" class="inv_feedback"></small>
                             </div>
 
                             <!-- Expiration Date -->
                             <div id="expirationDateB-form" class="form-group col-lg-12">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mr-1 placeholder_color text-light"
-                                        id="inputGroupPrepend"><i class="fas fa-calendar-alt fa-xl"></i></span>
+                                    <span class="input-group-text mr-1 placeholder_color" id="inputGroupPrepend"><i
+                                            class="fas fa-calendar-alt fa-xl"></i></span>
 
                                     <input placeholder="Expiration Date" type="date" name="" class="form-control"
                                         id="expirationDateB-input" value="">
                                 </div>
-                                <small id="expirationDateB-feedback" class=""></small>
+                                <small id="expirationDateB-feedback" class="inv_feedback"></small>
                             </div>
-                            <a type="submit" class="btn btn-primary signupB" style="width:98%;">Submit</a>
+                            <div class="form-group col-lg-12">
+                                <a type="submit" class="btn btn-primary signupB" style="width:100%;">Submit</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,8 +83,8 @@
             <div class="container">
                 <div role="tabpanel" class="tab-pane active" id="expenses">
                     <div class="form_expenses">
-                        <div class="col-md-12 text-center">
-                            <h4 class="dark-grey mb-4">EXPENSES</h4>
+                        <div class="col-md-12">
+                            <h4 class="dark-grey mb-4 text-center">EXPENSES</h4>
 
                             <!-- Department Name -->
                             <div id="departmentNameE-form" class="form-group col-lg-12">
@@ -92,90 +95,60 @@
                                     <option>example_3</option>
                                     <option>Add More</option>
                                 </select>
-                                <small id="departmentNameE-feedback" class=""></small>
+                                <small id="departmentNameE-feedback" class="inv_feedback"></small>
                             </div>
 
                             <!-- addCategoryNameE display none-->
                             <div id="addCategoryNameE-form" class="form-group col-lg-12 display_node">
                                 <input placeholder="Add Department Name" type="text" class="form-control"
                                     id="addCategoryNameE-input" value="">
-                                <small id="addCategoryNameE-feedback" class=""></small>
+                                <small id="addCategoryNameE-feedback" class="inv_feedback"></small>
                             </div>
 
                             <!-- Expense Name -->
                             <div id="expenseNameE-form" class="form-group col-lg-12">
                                 <input placeholder="Expense Name" type="text" name="" class="form-control"
                                     id="expenseNameE-input" value="">
-                                <small id="expenseNameE-feedback" class=""></small>
+                                <small id="expenseNameE-feedback" class="inv_feedback"></small>
                             </div>
+
 
                             <!-- Expiration Cost-->
                             <div id="expenseCostE-form" class="form-group col-lg-12">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mr-1 placeholder_color text-light"
-                                        id="inputGroupPrepend"><i class="fas fa-dollar-sign fa-xl"></i></span>
-                                    <input placeholder="Expense Cost" type="" aria-describedby="inputGroupPrepend"
+                                    <span class="input-group-text mr-1 placeholder_color" id="inputGroupPrepend"><i
+                                            class="fas fa-dollar-sign fa-xl"></i></span>
+                                    <input pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
+                                        placeholder="Expense Cost" type="" aria-describedby="inputGroupPrepend"
                                         class="form-control comma" id="expenseCostE-input" value="">
                                 </div>
-                                <small id="expenseCostE-feedback" class=""></small>
+                                <small id="expenseCostE-feedback" class="inv_feedback"></small>
                             </div>
 
                             <!-- Expiration Date -->
                             <div id="expirationDateE-form" class="form-group col-lg-12">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text mr-1 placeholder_color text-light"
-                                        id="inputGroupPrepend"><i class="fas fa-calendar-alt fa-xl"></i></span>
+                                    <span class="input-group-text mr-1 placeholder_color" id="inputGroupPrepend"><i
+                                            class="fas fa-calendar-alt fa-xl"></i></span>
 
                                     <input placeholder="Expiration Date" aria-describedby="inputGroupPrepend"
                                         type="date" name="" class="form-control" id="expirationDateE-input">
                                 </div>
-                                <small id="expirationDateE-feedback"></small>
+                                <small id="expirationDateE-feedback" class="inv_feedback"></small>
 
                             </div>
-                            <a type="submit" class="btn btn-primary signupE" style="width:98%;">Submit</a>
+                            <div class="form-group col-lg-12">
+                                <a type="submit" class="btn btn-primary signupE text-center"
+                                    style="width:100%;">Submit</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
-
-<script>
-    $('input.comma').keyup(function(event) {
-
-  // skip for arrow keys
-  if(event.which >= 37 && event.which <= 40) return;
-
-  // format number
-  $(this).val(function(index, value) {
-    return value
-    .replace(/\D/g, "")
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    ;
-  });
-});
-
-
-
-document.getElementById('departmentNameE-form').onchange = function() {
-
-if($("#departmentNameE-input").val() == "Add More") {
-    $("#addCategoryNameE-form").removeClass("display_node"); 
-} else {
-    $("#addCategoryNameE-form").addClass("display_node"); 
-}
-}
-
-document.getElementById('departmentNameB-form').onchange = function() {
-
-if($("#departmentNameB-input").val() == "Add More") {
-    $("#addCategoryNameB-form").removeClass("display_node"); 
-} else {
-    $("#addCategoryNameB-form").addClass("display_node"); 
-}
-}
- 
-</script>
+<script src="/assets/js/currency_input.js"></script>
+<script src="/assets/js/add_expense.js"></script>
+<script src="/assets/js/add_budget.js"></script>
