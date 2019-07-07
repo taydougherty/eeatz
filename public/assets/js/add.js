@@ -5,20 +5,23 @@ $(document).ready(function() {
     var departmentNameInputB = $("input#departmentNameB-input");
     var budgetAmountInputB = $("input#budgetAmountB-input");
     var expirationDateInputB = $("input#expirationDateB-input");
+    var addCategoryNameB = $("input#AddcategoryNameB-input");
  // Expenses Form
     var ButtonE = $(".signupE");
     var departmentNameInputE = $("input#departmentNameE-input");
     var expenseNameInputE = $("input#expenseNameE-input");
     var expenseCostInputE = $("input#expenseCostE-input");
     var expirationDateInputE = $("input#expirationDateE-input");
+    var addCategoryNameE = $("input#addCategoryNameE-input");
+
 
     // validation
     departmentNameInputB.bind('input propertychange', function() {
-    if (departmentNameInputB.val().trim().length < 4) {
+    if (departmentNameInputB !== "Select A Department") {
       $("#departmentNameInputB-form").removeClass("has-success");
 
       $("#departmentNameInputB-form").addClass("has-error");
-      $("#departmentNameInputB-feedback").text("Department name must be at least 4 characters long");
+      $("#departmentNameInputB-feedback").text("Please select a department");
     } else {
       $("#departmentNameInputB-form").removeClass("has-error");
 
@@ -28,7 +31,7 @@ $(document).ready(function() {
   });
 // validation
   departmentNameInputE.bind('input propertychange', function() {
-    if (departmentNameInputE.val().trim().length < 4) {
+    if (departmentNameInputE !== "Select A Department") {
       $("#departmentNameInputE-form").removeClass("has-success");
 
       $("#departmentNameInputE-form").addClass("has-error");
