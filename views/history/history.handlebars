@@ -1,18 +1,431 @@
- {{> nav }}
- {{> logo }}
+{{> nav }}
+{{> logo }}
+<div class="container">
+
+    <ul class="nav nav-bordered mt-4 mt-md-2 mb-0 clearfix" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a href="#budget" class="nav-link active" role="tab" data-toggle="tab" aria-controls="budget">BUDGET</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a href="#expenses" class="nav-link" role="tab" data-toggle="tab" aria-controls="expenses">EXPENSES</a>
+        </li>
+    </ul>
+
+    <hr class="mt-0 mb-5">
+
+    <div class="modal fade " id="filterB" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterHeader">Filter by:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="UserB">
+                            <label class="form-check-label" for="UserB">
+                                User
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-8">
+                            <select id="UserListB" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="RestaurantB">
+                            <label class="form-check-label" for="RestaurantB">
+                                Restaurant
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-8">
+
+                            <select id="RestListB" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="Main-CatB">
+                            <label class="form-check-label" for="Main-CatB">
+                                Main Category
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-8">
+                            <select id="MainCatListB" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="Sub-CatB">
+                            <label class="form-check-label" for="Sub-CatB">
+                                Sub-Category
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-8">
+
+                            <select id="SubCatListB" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="CreateDateB">
+                            <label class="form-check-label" for="CreateDateB">
+                                Date Created:
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+
+                            <select id="DateSortB1" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
+
+                            <select id="DateSelectB1" class="form-control">
+                            </select>
+                            <select id="DateSelectB2" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="ExpireDateB">
+                            <label class="form-check-label" for="ExpireDateB">
+                                Date Expire:
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+
+                            <select id="DateSortB2" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
+
+                            <select id="DateSelectB3" class="form-control">
+                            </select>
+                            <select id="DateSelectB4" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="filterE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterHeader">Filter by:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="UserE">
+                            <label class="form-check-label" for="UserE">
+                                User
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-8">
+                            <select id="UserListE" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="RestaurantE">
+                            <label class="form-check-label" for="RestaurantE">
+                                Restaurant
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-8">
+
+                            <select id="RestListE" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="Main-CatE">
+                            <label class="form-check-label" for="Main-CatE">
+                                Main Category
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-8">
+                            <select id="MainCatListE" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="Sub-CatE">
+                            <label class="form-check-label" for="Sub-CatE">
+                                Sub-Category
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-8">
+
+                            <select id="SubCatListE" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="CreateDateE">
+                            <label class="form-check-label" for="CreateDateE">
+                                Date Created:
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+
+                            <select id="DateSortE1" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
+
+                            <select id="DateSelectE1" class="form-control">
+                            </select>
+                            <select id="DateSelectE2" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="col-sm-1"></div>
+                        <div class="form-check col-sm-3">
+                            <input class="form-check-input" type="checkbox" value="" id="DateOccurredE">
+                            <label class="form-check-label" for="DateOccurredE">
+                                Date Occured:
+                            </label>
+                        </div>
+
+                        <div class="form-group col-sm-4">
+
+                            <select id="DateSortE2" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-4">
+
+                            <select id="DateSelectE3" class="form-control">
+                            </select>
+                            <select id="DateSelectE4" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editEntryModalB" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterHeader">Edit Entry:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{!-- Restaurant Category Department Budget Date Added Expiration Date --}}
+                    <div class="form-group">
+                        <label for="RestB">Restaurant</label>
+                        <select id="RestB" class="form-control">
+                            <option>1</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="CategoryB">Category</label>
+                        <input type="text" class="form-control" id="CategoryB" placeholder="Utilities">
+                    </div>
+                    <div class="form-group">
+                        <label for="DepartmentBudgetB">Department Budget</label>
+                        <input type="text" class="form-control" id="DepartmentBudgetB" placeholder="20000">
+                    </div>
+                    <div class="form-group">
+                        <label for="DateAddedB">Date Added</label>
+                        <input type="date" class="form-control" id="DateAddedB" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="ExpirationDateB">Date Added</label>
+                        <input type="date" class="form-control" id="ExpirationDateB" placeholder="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editEntryModalE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterHeader">Edit Entry:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="RestE">Restaurant</label>
+                        <select id="RestE" class="form-control">
+                            <option>1</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="CategoryE">Category</label>
+                        <input type="text" class="form-control" id="CategoryE" placeholder="Utilities">
+                    </div>
+                    <div class="form-group">
+                        <label for="SubCategoryE">Sub-Category</label>
+                        <input type="text" class="form-control" id="SubCategoryE" placeholder="Wate">
+                    </div>
+                    <div class="form-group">
+                        <label for="ExpensesE">Expenses</label>
+                        <input type="decimal" class="form-control" id="ExpensesE" placeholder="3425.86">
+                    </div>
+                    <div class="form-group">
+                        <label for="DateAddedE">Date Added</label>
+                        <input type="date" class="form-control" id="DateAddedE" placeholder="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="budget">
 
-<table class="table table-striped table-dark">
-    <thead>
-        <tr>
-            <th scope="col">Restaurant</th>
-            <th scope="col">Category</th>
-            <th scope="col">Subcategory</th>
-            <th scope="col">Expenses</th>
-            <th scope="col">Date</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+            <!-- Budget table -->
+            <table class="table table-striped table-dark">
+                <button class="float-right" data-toggle="modal" data-target="#filterB">Filter</button>
+
+                <thead>
+                    <tr>
+                        <th scope="col">Restaurant</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Department Budget</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Expiration Date</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {{!-- Example entry --}}
+                    <tr>
+                        <td>1</td>
+                        <td>Utilities</td>
+                        <td>20000</td>
+                        <td>2019-07-01</td>
+                        <td>2019-07-31</td>
+                        <td><button class="editEntry" id="" data-toggle="modal"
+                                data-target="#editEntryModalB">Edit</button>
+                        </td>
+
+                    </tr>
+                    {{!-- rename this to whatever the table name ends up being --}}
+                    {{!-- {{#each budget}}
+               
+                    {{/each}} --}}
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="expenses">
+
+            <!-- Expenses table-->
+            <table class="table table-striped table-dark">
+                <button class="float-right" data-toggle="modal" data-target="#filterE">Filter</button>
+
+                <thead>
+                    <tr>
+                        <th scope="col">Restaurant</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Subcategory</th>
+                        <th scope="col">Expenses</th>
+                        <th scope="col">Date</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {{!-- Example entry --}}
+                    <tr>
+                        <td>1</td>
+                        <td>Utilities</td>
+                        <td>Water</td>
+                        <td>3425.86</td>
+                        <td>2019-07-14</td>
+                        <td><button class="editEntry" data-toggle="modal" data-target="#editEntryModalE">Edit</button>
+                        </td>
+
+                    </tr>
+                    {{!-- rename this to whatever the table name ends up being --}}
+                    {{!-- {{#each expenses}}
+                    {{> tables/expenses_table}}
+                    {{/each}} --}}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
