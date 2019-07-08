@@ -6,7 +6,7 @@ exports.index = function(req, res) {
 
 // req.body.table       "Budget", "Expense"
 // req.body.headers     "categories, amount"
-exports.chartQuery = function (req, res) {
+exports.allQuery = function (req, res) {
     if (req.body.table === "Expense") {
         var database = db.expenses;
     } else if (req.body.table === "Budget") {
