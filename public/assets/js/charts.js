@@ -303,7 +303,7 @@ function makePercentageBar(arr, name, totalBudget) {
 }
 
 $(document).ready(function () {
-    $.post("/", {
+    $.post("/api/query", {
         table: "Budget",
         headers: "departmentName, budgetTotal"
     }).then(function (data) {
