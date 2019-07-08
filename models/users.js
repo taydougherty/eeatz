@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-  User.prototype.validPassword = function (password) {
+  users.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
   }
   users.associate = function(models) {

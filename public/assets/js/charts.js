@@ -301,3 +301,16 @@ function makePercentageBar(arr, name, totalBudget) {
 
     }
 }
+
+$(document).ready(function () {
+    $.post("/", {
+        table: "Budget",
+        headers: "departmentName, budgetTotal"
+    }).then(function (data) {
+        if (data.status === 200) {
+            console.log(data.data);
+        } else if (data.status === 201) {
+            console.log(data.msg);
+        }
+    })
+})

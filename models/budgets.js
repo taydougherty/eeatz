@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const budget = sequelize.define('budget', {
+  const budget = sequelize.define('budgets', {
     departmentName: {
       type: DataTypes.STRING,
       allowNull:false,
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     budgetTotal: {
-      type:DataTypes.DataTypes.DECIMAL(30, 2),
+      type:DataTypes.DECIMAL(30, 2),
       allowNull:false
     },
     dateStart: {
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         len: [1]
       }
     }
-  }, {});
+  });
   budget.associate = function(models) {
     // associations can be defined here
   };
