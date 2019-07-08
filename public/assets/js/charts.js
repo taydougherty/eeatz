@@ -309,6 +309,7 @@ $(document).ready(function () {
     }).then(function (data) {
         if (data.status === 200) {
             console.log(data.data);
+            // sum up all cate amt first before calling function
         } else if (data.status === 201) {
             console.log(data.msg);
         }
