@@ -133,11 +133,11 @@ $(document).ready(function () {
             departmentName: department,
             expenseName: expenseNameInputE.val().trim(),
             expenseCost: expenseCostInputE.val().trim(),
-            expirationDate: expirationDateInputE.val().trim()
+            dateOccurred: expirationDateInputE.val().trim()
         };
 
         // User Data Test
-        // if (!userData.departmentName || userData.departmentName == "Select A Department" || !userData.expenseName || !userData.expenseCost || !userData.expirationDate) {
+        // if (!userData.departmentName || userData.departmentName == "Select A Department" || !userData.expenseName || !userData.expenseCost || !userData.dateOccurred) {
         //   return alert("Please don't leave fields blank");
         // }
 

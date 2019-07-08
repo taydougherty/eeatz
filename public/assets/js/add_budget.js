@@ -111,12 +111,13 @@ $(document).ready(function () {
 
         var userDataB = {
             departmentName: department,
-            budgetAmount: budgetAmountInputB.val().trim(),
-            expirationDate: expirationDateInputB.val().trim()
+            budgetTotal: budgetAmountInputB.val().trim(),
+            dateStart: moment(),
+            dateExpired: expirationDateInputB.val().trim(),
         };
 
         // User Data Test
-        // if (!userData.departmentName || userData.departmentName == "Select A Department" || !userData.budgetAmount || !userData.expirationDate) {
+        // if (!userData.departmentName || userData.departmentName == "Select A Department" || !userData.budgetTotal || !userData.dateExpired) {
         //   return alert("Please don't leave fields blank");
         // }
 
