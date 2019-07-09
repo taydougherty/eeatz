@@ -1,6 +1,7 @@
 $(document).ready(function () {
   // Getting references to our form and input
   var signUpButton = $(".signup");
+  var newRestaurantButton = $(".addnew");
   var firstnameInput = $("input#firstname-input");
   var lastnameInput = $("input#lastname-input");
   var usernameInput = $("input#username-input");
@@ -142,6 +143,12 @@ $(document).ready(function () {
     }
   });
 
+  newRestaurantButton.on("click", function (event) {
+    $(".restaurant").val("");
+
+    addNewRestaurant();
+  });
+
   // Check if emails match each other
   signUpButton.on("click", function (event) {
     // Replace all alerts with modals
@@ -187,9 +194,13 @@ $(document).ready(function () {
     });
   }
 
-  // if click on addnew for restaurants display none for div with class restaurant
-  // on submit check if div with class restaurant display === none
-  // if yes, then use addnew input as restaurant value
-  // else, find dropdown item value that is selected
-
+  function addNewRestaurant() {
+    $.post("", {
+      restaurant: restaurantInput.val().trim()
+    }).then(function (data) {
+      console.log("New restaurant added: ", data);
+    }).catch(function (err) {
+      console.log(err);
+    });
+  }
 });
