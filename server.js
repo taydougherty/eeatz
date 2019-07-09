@@ -59,8 +59,10 @@ app.use(function (err, req, res, next) {
         error: (app.get('env') === 'development') ? err : {}
     })
 });
+// ------------------------------
 
 // our module get's exported as app.
+// ------------------------------
 module.exports = app;
 
 
