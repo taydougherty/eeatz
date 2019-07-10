@@ -1,16 +1,16 @@
 /* global body padding */
 body {
-  padding-top:    20px;
+  padding-top: 20px;
   padding-bottom: 20px;
 }
 
 /* invalid feedback */
-.inv_feedback{
-  color:red;
-  font-size:13px;
+.inv_feedback {
+  color: red;
+  font-size: 13px;
 }
 
-.hover_blue:hover { 
+.hover_blue:hover {
   background-color: #1997c6;
 }
 
@@ -20,41 +20,41 @@ input[type="date"]:before {
   color: #6c757d;
   margin-right: 0.25em;
 }
-input[type="date"]:focus:before{
-  color:black;
+input[type="date"]:focus:before {
+  color: black;
 }
 input[type="date"]:valid:before {
   content: "";
 }
 
 /* reset placeholder color */
-/* .form-control::-webkit-input-placeholder {
-  color: #D0D1D1;
+.form-control::-webkit-input-placeholder {
+  color: #6c757d;
 }
 .form-control::-moz-placeholder {
-  color: #D0D1D1;
+  color: #6c757d;
 }
 .form-control:-ms-input-placeholder {
-  color: #D0D1D1;
+  color: #6c757d;
 }
 .form-control::placeholder {
-  color: #D0D1D1;
-} */
+  color: #6c757d;
+}
 
- /* fix input placeholder color */
- input[type=date] {
-  color:#6c757d;
+/* fix input placeholder color */
+input[type="date"] {
+  color: #6c757d;
 }
 
 /* Font Awesome incos */
-i { 
-  color:white;
+i {
+  color: white;
 }
 
-/* OLD PLACEHOLDER COLOR CODE #6c757d */ 
+/* OLD PLACEHOLDER COLOR CODE #6c757d */
 /* fix select placeholder color with*/
 .placeholder_color {
-  color:#6c757d;
+  color: #6c757d;
 }
 
 /* Hide subcategory input */
@@ -64,15 +64,24 @@ i {
 
 @media (min-width: 768px) {
   body {
-    padding-top:    50px;
+    padding-top: 50px;
     padding-bottom: 50px;
   }
 }
 
-
 /* global spacing overrides */
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   margin-top: 0;
 }
 hr {

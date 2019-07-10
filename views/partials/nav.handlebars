@@ -22,13 +22,17 @@
                     <small class="iconav-nav-label">History</small>
                 </a>
             </li>
+            {{#if isAuthenticated}}
             <li class="text-center hover_blue">
-                <a class="nav-link" href="#" title="Log Out" data-toggle="tooltip" data-placement="right"
+                <a class="nav-link" href="/users/sign-out" title="Log Out" data-toggle="tooltip" id="logout" data-placement="right"
                     data-container="body">
                     <span><i class="fas fa-sign-out-alt"></i></span>
                     <small class="iconav-nav-label">Log Out</small>
                 </a>
             </li>
+            {{/if}}
         </ul>
     </div>
 </nav>
+
+ 

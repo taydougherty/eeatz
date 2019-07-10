@@ -1,10 +1,11 @@
 var db = require('../models');
 
-exports.add = function(req, res) {
+exports.index = function(req, res) {
     res.render('add/add', {
         layout: 'main'
       });
 };
+
 
 exports.budgetDropdown = function (req, res) {
   db.budgets.findAll({
