@@ -4,11 +4,65 @@
       <a href="/"><img src="assets/images/logo.png" width="80%" alt=""></a>
     </div>
     <div class="text-center">
-      <a href="/home" class="btn btn-outline-primary px-3" style="margin-right:10px; width:25%">HOME</a>
-      <a href="/partials/login" class="btn btn-outline-primary px-3 page-scroll" data-toggle="modal"
-        style="margin-right:10px; width:25%">LOGIN</a>
-      <a href="/users/registration" class="btn btn-outline-primary px-3 page-scroll" data-toggle="modal"
-        style="width:25%">SIGN UP</a>
+      <a href="/partials/login" class="btn btn-outline-primary px-3 page-scroll" id="login" data-toggle="modal"
+        data-target=".bd-example-modal-lg" style="margin-right:10px; width:35%">LOGIN</a>
+      <a href="/users/registration" class="btn btn-outline-primary px-3 page-scroll" id="sign-up" data-toggle="modal"
+        data-target=".bd-example-modal-lg" style="width:35%">SIGN UP</a>
     </div>
-  </div>
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <ul class="nav nav-bordered mt-4 mt-md-2 mb-0 clearfix" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a href="#budget" class="nav-link active" role="tab" data-toggle="tab" aria-controls="budget">SIGN_UP</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a href="#expenses" class="nav-link" role="tab" data-toggle="tab" aria-controls="expenses">LOGIN</a>
+            </li>
+          </ul>
+
+          <hr class="mt-0 mb-5">
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane budget_a" id="budget">
+
+                <div role="tabpanel" class="tab-pane budget_a" id="budget">
+                  {{>register}}
+                </div>
+                </div>
+  
+                <div role="tabpanel" class="tab-pane expense_a" id="expenses">
+                   <div role="tabpanel" class="tab-pane  expense_b" id="expenses">
+                     {{>login}}
+                   </div>
+                </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
 </body>
+
+<script src="/assets/js/signup.js"></script>
+
+<script>
+    $("#login").on("click", function () {
+  $(".budget_a").removeClass("active");
+  $(".budget_b").addClass("active");
+  $(".expense_a").addClass("active");
+  $(".expense_b").removeClass("active");
+  })
+
+ $("#sign-up").on("click", function () {
+  $(".budget_a").addClass("active");
+  $(".budget_b").removeClass("active");
+  $(".expense_a").removeClass("active");
+  $(".expense_b").addClass("active");
+  })
+
+
+</script>
