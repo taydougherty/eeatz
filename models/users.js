@@ -1,14 +1,13 @@
 'use strict';
-
 var bcrypt = require("bcrypt");
 
-module.exports = (sequelize, DataTypes) => {
-  const users = sequelize.define('users', {
+module.exports = function(sequelize, DataTypes) {
+  var users = sequelize.define('users', {
     username: {
       type:DataTypes.STRING,
       allowNull:false,
       validate: {
-        len: [6]
+        len: [2]
       }
     },
     firstName: {
@@ -44,6 +43,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {
+    // Hooks are automatic methods that run during various phases of the User Model lifecycle
+    // In this case, before a User is created, we will automatically hash their password
     hooks: {
       beforeCreate: function(user, options) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
@@ -55,6 +56,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   users.associate = function(models) {
     // associations can be defined here
-  };
+ 
+  }
   return users;
 };
