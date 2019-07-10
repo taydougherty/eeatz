@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const session = require('express-session');
-// const passport = require("./config/passport");
+const passport = require("./config/passport");
 // const config = require("./config/extra-config");
 
 // Express settings
@@ -37,8 +37,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use(session({ secret: config.sessionKey, resave: true, saveUninitialized: true }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 // app.use(authCheck);
 
 
@@ -64,47 +64,3 @@ app.use(function (err, req, res, next) {
 // our module get's exported as app.
 // ------------------------------
 module.exports = app;
-
-
-// var express = require("express");
-
-// var app = express();
-// var PORT = 3000;
-
-// // Sets up the Express app to handle data parsing
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-
-// app.use(express.static("public"));
-
-// var exphbs = require("express-handlebars");
-
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
-
-
-// // Serve index.handlebars to the root route, populated with all quote data.
-// app.get("/", function(req, res) {
-//     res.render("index");
-// });
-
-// app.get("/history", function(req, res) {
-//     res.render("history");
-// });
-
-// app.get("/add", function(req, res) {
-//     res.render("add");
-// });
-
-// app.get("/home", function(req, res) {
-//     res.render("home");
-// });
-
-
-
-// // Start our server so that it can begin listening to client requests.
-// app.listen(PORT, function() {
-//   // Log (server-side) when our server has started
-//   console.log("Server listening on: http://localhost:" + PORT);
-// });
-

@@ -113,7 +113,6 @@ $(document).ready(function () {
             departmentName: department,
             budgetTotal: budgetAmountInputB.val().trim(),
             // dateStart: moment(),
-            dateExpired: expirationDateInputB.val().trim()
         };
 
         // User Data Test

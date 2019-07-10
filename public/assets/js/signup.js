@@ -1,16 +1,62 @@
 $(document).ready(function () {
   // Getting references to our form and input
   var signUpButton = $(".signup");
-  var newRestaurantButton = $(".addnew");
   var firstnameInput = $("input#firstname-input");
   var lastnameInput = $("input#lastname-input");
   var usernameInput = $("input#username-input");
-  var restaurantInput = $("input#restaurant-input");
   var emailInput = $("input#email-input");
   var passwordInput = $("input#password-input");
+  var restaurantInput = $("#restaurant-input");
+  var addRestaurantInput = $("#addRestaurant-input");
 
   var repeatPasswordInput = $("input#repeat-password-input");
   var repeatEmailInput = $("input#repeat-email-input");
+
+  document.getElementById('restaurant-form').onchange = function () {
+    if ($("#restaurant-input").val() == "Add More") {
+      $("#addRestaurant-form").removeClass("display_node");
+      $("#restaurant-form").removeClass("has-error");
+      $("#restaurant-form").addClass("has-success");
+      $("#addRestaurant-form").removeClass("has-success");
+      $("#addRestaurant-form").addClass("has-error");
+      $("#restaurant-feedback").text("");
+    } else if ($("#restaurant-input").val() != "Add More") {
+      $("#addRestaurant-form").addClass("display_node");
+      $("#addRestaurant-form").removeClass("has-error");
+      $("#addRestaurant-form").addClass("has-success");
+      addRestaurantInput.val("");
+    }
+    if ($("#restaurant-input").val() !== "Add More" && $("#restaurant-input").val() !== "Select A Restaurant") {
+      $("#restaurant-form").removeClass("has-error");
+      $("#restaurant-form").addClass("has-success");
+      $("#addRestaurant-feedback").text("");
+    }
+    if ($("#restaurant-input").val() != "Select A Restaurant") {
+      $("#restaurant-feedback").text("");
+    }
+    if ($("#restaurant-input").val() == "Select A Restaurant") {
+      $("#restaurant-form").removeClass("has-success");
+      $("#restaurant-form").addClass("has-error");
+      $("#restaurant-feedback").text("Please select a restaurant.");
+
+    }
+  }
+
+
+  // Username "on-the-fly" validation
+  addRestaurantInput.bind('input propertychange', function () {
+    if (addRestaurantInput.val().trim().length < 6) {
+      $("#addRestaurant-form").removeClass("has-success");
+
+      $("#addRestaurant-form").addClass("has-error");
+      $("#addRestaurant-feedback").text("Restaurant name must be at least 6 characters long");
+    } else {
+      $("#addRestaurant-form").removeClass("has-error");
+
+      $("#addRestaurant-form").addClass("has-success");
+      $("#addRestaurant-feedback").text("Restaurant valid!");
+    }
+  });
 
   // Username "on-the-fly" validation
   usernameInput.bind('input propertychange', function () {
@@ -57,30 +103,6 @@ $(document).ready(function () {
     }
   });
 
-  // Dropdown for which restaurant user is associated with
-  $.get("route", {
-
-  }).then(function (data) {
-    data.forEach(element => {
-      $(".restaurant").append("<a class='dropdown - item' href='#'>" + element + "</a>")
-    });
-  })
-
-  // Restaurant "on-the-fly" validation
-  restaurantInput.bind('input propertychange', function () {
-    if (restaurantInput.val().trim().length < 1) {
-      $("#restaurant-form").removeClass("has-success");
-
-      $("#restaurant-form").addClass("has-error");
-      $("#restaurant-feedback").text("Please enter a valid restaurant name");
-    } else {
-      $("#restaurant-form").removeClass("has-error");
-
-      $("#restaurant-form").addClass("has-success");
-      $("#restaurant-feedback").text("Restaurant name valid!");
-    }
-  });
-
   // Email "on-the-fly" validation
   emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   emailInput.bind('input propertychange', function () {
@@ -114,6 +136,7 @@ $(document).ready(function () {
       $("#email-repeat-feedback").text("Emails Match!");
     }
   });
+
   var passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/;
   passwordInput.bind('input propertychange', function () {
     if (!passwordRegEx.test($(this).val())) {
@@ -143,45 +166,71 @@ $(document).ready(function () {
     }
   });
 
-  newRestaurantButton.on("click", function (event) {
-    $(".restaurant").val("");
-
-    addNewRestaurant();
-  });
-
   // Check if emails match each other
   signUpButton.on("click", function (event) {
+
+    if ($("#restaurant-input").val() == "Select A Restaurant") {
+      $("#restaurant-form").removeClass("has-success");
+      $("#restaurant-form").addClass("has-error");
+      $("#restaurant-feedback").text("Please select a restaurant.");
+
+    }
     // Replace all alerts with modals
+
+    var restaurant;
+
+    if ($("#restaurant-input").val() == "Add More") {
+      restaurant = addRestaurantInput.val().trim();
+    } else {
+      restaurant = restaurantInput.val().trim();
+    }
 
     var userData = {
       username: usernameInput.val().trim(),
+      firstName: firstnameInput.val().trim(),
+      lastName: lastnameInput.val().trim(),
       email: emailInput.val().trim(),
-      password: passwordInput.val().trim()
+      password: passwordInput.val().trim(),
+      restaurantName: restaurant
     };
 
-    if (!userData.username || !userData.email || !userData.password) {
+    console.log(usernameInput.val().trim())
+    console.log(firstnameInput.val().trim())
+    console.log(lastnameInput.val().trim())
+    console.log(emailInput.val().trim())
+    console.log(passwordInput.val().trim())
+    console.log(restaurant)
+
+    if (!userData.username || !userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.restaurantName) {
       return alert("Please don't leave fields blank");
     }
 
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData.username, userData.email, userData.password);
+    signUpUser(userData.username, userData.firstName, userData.lastName, userData.email, userData.password, userData.restaurantName);
     firstnameInput.val("");
     lastnameInput.val("");
-    restaurantInput.val("");
+    addRestaurantInput.val("");
     emailInput.val("");
     passwordInput.val("");
     usernameInput.val("");
     repeatPasswordInput.val("");
     repeatEmailInput.val("");
+    $("#addrestaurant-form").addClass("display_node")
+    $('.option option').prop('selected', function () {
+      return this.defaultSelected;
+    });
   });
 
   // Does a post to the signup route. If succesful, we are redirected to the members page
   // Otherwise we log any errors
-  function signUpUser(username, email, password) {
+  function signUpUser(username, firstName, lastName, email, password, restaurantName) {
     $.post("/users/signup", {
       username: username,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
-      password: password
+      password: password,
+      restaurantName: restaurantName
     }).then(function (data) {
       if (data.duplicateUser) {
         // Replace with Modal
@@ -189,18 +238,7 @@ $(document).ready(function () {
       } else {
         window.location = data.redirect;
       }
-    }).catch(function (err) {
-      console.log(err);
-    });
+    })
   }
 
-  function addNewRestaurant() {
-    $.post("", {
-      restaurant: restaurantInput.val().trim()
-    }).then(function (data) {
-      console.log("New restaurant added: ", data);
-    }).catch(function (err) {
-      console.log(err);
-    });
-  }
 });

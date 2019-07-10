@@ -1,4 +1,3 @@
-{{> nav }}
 <div id="registration-container" class="container-fluid">
   <section class="container">
     <div class="container-page">
@@ -23,6 +22,24 @@
           <small id="lastname-feedback" class=""></small>
         </div>
 
+        <!-- Restorant Name -->
+        <div id="restaurant-form" class="form-group col-lg-12">
+          <select class="form-control option placeholder_color" id="restaurant-input">
+            <option selected="selected">Select A Restaurant</option>
+            <option>example_1</option>
+            <option>example_2</option>
+            <option>example_3</option>
+            <option>Add More</option>
+          </select>
+          <small id="restaurant-feedback" class="inv_feedback"></small>
+        </div>
+
+        <!-- Add restorant display none -->
+        <div id="addRestaurant-form" class="form-group col-lg-12 display_node">
+          <input placeholder="Add Restaurant" type="text" class="form-control" id="addRestaurant-input" value="">
+          <small id="addRestaurant-feedback" class="inv_feedback"></small>
+        </div>
+
         <div id="email-form" class="form-group col-lg-12">
           <label>Email Address</label>
           <input type="email" name="" class="form-control" id="email-input" value="">
@@ -37,21 +54,6 @@
           <small id="email-repeat-feedback" class=""></small>
         </div>
 
-        <div id="restaurant-form" class="form-group col-lg-12">
-          <label>Restaurant</label>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Choose your restaurant
-            </button>
-            <div class="dropdown-menu restaurant" aria-labelledby="dropdownMenuButton">
-            </div>
-          </div>
-          <button type="button" class="btn btn-primary btn-sm addnew">Add new restaurant</button>
-          <input type="" name="" class="form-control" id="restaurant-input" value="">
-          <small id="restaurant-feedback" class=""></small>
-        </div>
-
         <div id="password-form" class="form-group col-lg-12">
           <label>Password</label>
           <input type="password" name="" class="form-control" id="password-input" value="">
@@ -63,19 +65,8 @@
           <input type="password" name="" class="form-control" id="repeat-password-input" value="">
           <small id="repeat-password-feedback" class=""></small>
         </div>
-
-        <div class="col-sm-6">
-          <input type="checkbox" class="checkbox" />Send notifications to this email
-        </div>
-
       </div>
-
       <div class="col-md-6">
-        <h3 class="dark-grey">Terms and Conditions</h3>
-        <p>
-          By clicking on "Register" you agree to The Company's' Terms and Conditions.
-        </p>
-
         <button type="submit" class="btn btn-primary signup">Register</button>
       </div>
     </div>
