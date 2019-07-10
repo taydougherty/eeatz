@@ -5,76 +5,95 @@
 //              ["Main Category name in str", $ in number], 
 //              ["another category name", $ in number], 
 //            ...]
-// @param main Check if we are making summary pie chart or sub category pie chart
+// @param main Check if we are making summary pie chart (true) or sub category pie chart (false)
 // @param name This parameter only except "Budget" or "Expense"
 // 
 // does not return anything
 function makePieChart(arr, main, name) {
     // First check if parameter is passed in correctly
-    if (name !== "Budget" || name !== "Expense") {
+    if (name !== "Budget" && name !== "Expense") {
         console.log("Wrong paramter was passed into function. Please use either 'Budget' or 'Expense'.")
         return ""
     }
 
     google.charts.load("current", { packages: ["corechart"] });
 
-    // add in headers
-    if (main) {
-        var cate = "Main Categories";
-    } else {
-        var cate = "Sub Categories";
-    }
-    arr.unshift([cate, name]);
+    google.charts.setOnLoadCallback(drawChart);
 
-    // create data table
-    var data = google.visualization.arrayToDataTable(arr);
-    
-    // add in options
-    var options = {
-        title: name,
-        pieSliceText: 'label'
-    };
-
-    // get the location where the chart will be added
-    if (main) {
-        var div = "piechart";
-    } else {
-        var div = "d3-tip";
-    }
-    var chart = new google.visualization.PieChart(document.getElementById(div));
-    
-    // add event handler
-    
-    if (main) {
-        function selectHandler() {
-            var selectedItem = chart.getSelection()[0];
-            if (selectedItem) {
-                var category = data.getValue(selectedItem.row, 0);
-                top = $("#" + category).offset().top;
-                $("html, body").animate({ scrollTop: top }, 1000);
-            }
+    function drawChart() {
+        // add in headers
+        if (main) {
+            var cate = "Main Categories";
+        } else {
+            var cate = "Sub Categories";
         }
-        google.visualization.events.addListener(chart, 'select', selectHandler); 
+
+        if (arr[0][0] !== cate) {
+            arr.unshift([cate, name]);
+        }
+
+        // create data table
+        var data = google.visualization.arrayToDataTable(arr);
+
+        var formatter = new google.visualization.NumberFormat(
+            { prefix: '$', negativeColor: 'red', negativeParens: true });
+        formatter.format(data, 1);
+        
+        // add in options
+        var options = {
+            pieSliceText: 'label',
+            slices: {},
+            backgroundColor: 'transparent',
+            legend: "none",
+            pieHole: 0.5
+        };
+
+        // get the location where the chart will be added
+        if (main) {
+            var div = name;
+        } else {
+            var div = "d3-tip";
+        }
+        var chart = new google.visualization.PieChart(document.getElementById(div));
+        
+        // add event handler
+        
+        if (main) {
+            function selectHandler() {
+                var selectedItem = chart.getSelection()[0];
+                if (selectedItem) {
+                    var category = data.getValue(selectedItem.row, 0);
+                    top = $("#" + category).offset().top;
+                    $("html, body").animate({ scrollTop: top }, 1000);
+                }
+            }
+            google.visualization.events.addListener(chart, 'select', selectHandler); 
+        }
+
+        function mouseOverHandler(e) {
+            var slices = options.slices;
+            if (slices.hasOwnProperty(e.row)) {
+                if (slices[e.row].hasOwnProperty('offset')) return false
+            }
+            slices[e.row] = { offset: 0.2 };
+            options['slices'] = slices;
+            chart.draw(data, options);
+        }
+
+        google.visualization.events.addListener(chart, 'onmouseover', mouseOverHandler); 
+
+        function mouseOutHandler(e) {
+            var slices = options.slices;
+            slices[e.row] = {};
+            options['slices'] = slices;
+            chart.draw(data, options);
+        }
+
+        google.visualization.events.addListener(chart, 'onmouseout', mouseOutHandler); 
+
+        // draw the chart
+        chart.draw(data, options);
     }
-
-    function mouseOverHandler(row, col) {
-        console.log(row);
-        console.log(col);
-        // options.slices[parseInt(row)] = { offset: '.2' };
-    }
-
-    google.visualization.events.addListener(chart, 'onmouseover', mouseOverHandler); 
-
-    function mouseOutHandler(row, col) {
-        console.log(row);
-        console.log(col);
-        // options.slices[parseInt(row)] = { offset: '.2' };
-    }
-
-    google.visualization.events.addListener(chart, 'onmouseover', mouseOutHandler); 
-
-    // draw the chart
-    chart.draw(data, options);
 }
 
 // This is a function that will make percantage bar graphs for the summary page
@@ -302,16 +321,63 @@ function makePercentageBar(arr, name, totalBudget) {
     }
 }
 
+function sum(arr) {
+    var tempArr = [];
+
+    arr.forEach(item => {
+        var existing = tempArr.filter(function (v, i) {
+            return v.departmentName == item.departmentName;
+        });
+        if (existing.length) {
+            var existingIndex = tempArr.indexOf(existing[0]);
+            tempArr[existingIndex].budgetTotal += Number(item.budgetTotal);
+        } else {
+            item.budgetTotal = Number(item.budgetTotal);
+            tempArr.push(item);
+        }
+    });
+
+    return tempArr;
+}
+
 $(document).ready(function () {
-    $.post("/api/query", {
+    var budgetArr = [];
+
+    $.get("/api/query/", {
         table: "Budget",
         headers: "departmentName, budgetTotal"
     }).then(function (data) {
-        if (data.status === 200) {
-            console.log(data.data);
+        if (data.status === 200) {         
+            var tempArr = sum(data.data);
+
+            tempArr.forEach(e => {
+                budgetArr.push([e.departmentName, Number(e.budgetTotal)]);
+            });
             // sum up all cate amt first before calling function
+            makePieChart(budgetArr, true, "Budget");
         } else if (data.status === 201) {
             console.log(data.msg);
         }
     })
+
+    $.get("/api/query/", {
+        table: "Expense",
+        headers: "departmentName, expenseCost"
+    }).then(function (data) {
+        if (data.status === 200) {
+            var tempArr = sum(data.data);
+
+            tempArr.forEach(e => {
+                budgetArr.push([e.departmentName, Number(e.expenseCost)]);
+            });
+            // sum up all cate amt first before calling function
+            makePieChart(budgetArr, true, "Expense");
+        } else if (data.status === 201) {
+            console.log(data.msg);
+        }
+    })
+
+    $(window).resize(function () {
+        makePieChart(budgetArr, true, "Budget");
+    });
 })
