@@ -40,7 +40,7 @@ exports.signUpUser = function(req,res) {
         password: req.body.password,
         restaurantName: req.body.restaurantName
       }).then(function() {
-        res.send({redirect: '/home'});
+        res.send({redirect: '/'});
       }).catch(function(err) {
         res.json(err);
       });

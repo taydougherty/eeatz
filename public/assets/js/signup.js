@@ -12,6 +12,8 @@ $(document).ready(function () {
   var repeatPasswordInput = $("input#repeat-password-input");
   var repeatEmailInput = $("input#repeat-email-input");
   var valid;
+  var passwordValid;
+  var emailValid;
 
   document.getElementById('restaurant-form').onchange = function () {
     if ($("#restaurant-input").val() == "Add More") {
@@ -40,131 +42,166 @@ $(document).ready(function () {
       $("#restaurant-form").removeClass("has-success");
       $("#restaurant-form").addClass("has-error");
       $("#restaurant-feedback").text("Please select a restaurant.");
-
+      $("#addRestaurant-feedback").text("");
     }
   }
 
-
   // Username "on-the-fly" validation
-  addRestaurantInput.bind('input propertychange', function () {
-    if (addRestaurantInput.val().trim().length < 6) {
+  addRestaurantInput.focusout(function () {
+    if (addRestaurantInput.val().trim().length < 2) {
       $("#addRestaurant-form").removeClass("has-success");
-
       $("#addRestaurant-form").addClass("has-error");
-      $("#addRestaurant-feedback").text("Restaurant name must be at least 6 characters long");
-    } else {
+      $("#addRestaurant-feedback").text("Restaurant name must be at least 2 characters long");
+    } 
+  });
+  addRestaurantInput.bind('input propertychange', function () {
+    if (addRestaurantInput.val().trim().length >= 2) {
       $("#addRestaurant-form").removeClass("has-error");
-
       $("#addRestaurant-form").addClass("has-success");
-      $("#addRestaurant-feedback").text("Restaurant valid!");
+      $("#addRestaurant-feedback").text("");
     }
   });
 
   // Username "on-the-fly" validation
-  usernameInput.bind('input propertychange', function () {
-    if (usernameInput.val().trim().length < 6) {
+  usernameInput.focusout(function () {
+    if (usernameInput.val().trim().length < 2) {
       $("#username-form").removeClass("has-success");
-
       $("#username-form").addClass("has-error");
-      $("#username-feedback").text("username must be at least 6 characters long");
-    } else {
+      $("#username-feedback").text("User name must be at least 2 characters long");
+    }
+  });
+  usernameInput.bind('input propertychange', function () {
+    if (usernameInput.val().trim().length >= 2) {
       $("#username-form").removeClass("has-error");
-
       $("#username-form").addClass("has-success");
-      $("#username-feedback").text("Username valid!");
+      $("#username-feedback").text("");
     }
   });
 
   // First name "on-the-fly" validation
-  firstnameInput.bind('input propertychange', function () {
-    if (firstnameInput.val().trim().length < 1) {
+  firstnameInput.focusout(function () {
+    if (firstnameInput.val().trim().length < 2) {
       $("#firstname-form").removeClass("has-success");
-
       $("#firstname-form").addClass("has-error");
-      $("#firstname-feedback").text("Please enter a valid first name");
-    } else {
-      $("#firstname-form").removeClass("has-error");
+      $("#firstname-feedback").text("First name must be at least 2 characters long");
+    }
+  });
 
+  firstnameInput.bind('input propertychange', function () {
+    if (firstnameInput.val().trim().length >= 2) {
+      $("#firstname-form").removeClass("has-error");
       $("#firstname-form").addClass("has-success");
-      $("#firstname-feedback").text("First name valid!");
+      $("#firstname-feedback").text("");
     }
   });
 
   // Last name "on-the-fly" validation
-  lastnameInput.bind('input propertychange', function () {
+  lastnameInput.focusout(function () {
     if (lastnameInput.val().trim().length < 1) {
       $("#lastname-form").removeClass("has-success");
-
       $("#lastname-form").addClass("has-error");
-      $("#lastname-feedback").text("Please enter a valid last name");
-    } else {
-      $("#lastname-form").removeClass("has-error");
+      $("#lastname-feedback").text("Last name must be at least 1 characters long");
+    }
+  });
 
+  lastnameInput.bind('input propertychange', function () {
+    if (lastnameInput.val().trim().length >= 1) {
+      $("#lastname-form").removeClass("has-error");
       $("#lastname-form").addClass("has-success");
-      $("#lastname-feedback").text("Last name valid!");
+      $("#lastname-feedback").text("");
     }
   });
 
   // Email "on-the-fly" validation
   emailRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  emailInput.bind('input propertychange', function () {
+  emailInput.focusout(function () {
     if (!emailRegEx.test($(this).val())) {
       $("#email-form").removeClass("has-success");
-
       $("#email-form").addClass("has-error");
       $("#email-feedback").text("Invalid Email");
-      $("#email-additional-feedback").text("Ex: someone@example.com");
+      emailValid == false
+    } 
+    if (emailInput.val().trim() !== repeatEmailInput.val().trim()) {
+      $("#email-repeat-form").removeClass("has-success");
+      $("#email-repeat-form").addClass("has-error");
+      $("#email-repeat-feedback").text("Emails Don't Match");
+    }
+  });
 
-    } else {
+  emailInput.bind('input propertychange', function () {
+    if (emailRegEx.test($(this).val())) {
       $("#email-form").removeClass("has-error");
-
       $("#email-form").addClass("has-success");
-      $("#email-feedback").text("Valid Email!");
+      $("#email-feedback").text("");
       $("#email-additional-feedback").text("");
+      emailValid == true;
+    }
+    if (emailInput.val().trim() == repeatEmailInput.val().trim()) {
+      $("#email-repeat-form").removeClass("has-error");
+      $("#email-repeat-form").addClass("has-success");
+      $("#email-repeat-feedback").text("");
     }
   });
 
   // Check "on-the-fly" if repeated email matches email
-  repeatEmailInput.bind('input propertychange', function () {
+  repeatEmailInput.focusout(function () {
     if (emailInput.val().trim() !== repeatEmailInput.val().trim()) {
       $("#email-repeat-form").removeClass("has-success");
-
       $("#email-repeat-form").addClass("has-error");
       $("#email-repeat-feedback").text("Emails Don't Match");
-    } else {
-      $("#email-repeat-form").removeClass("has-error");
+    }
+  });
 
+  repeatEmailInput.bind('input propertychange', function () {
+    if (emailInput.val().trim() == repeatEmailInput.val().trim()) {
+      $("#email-repeat-form").removeClass("has-error");
       $("#email-repeat-form").addClass("has-success");
-      $("#email-repeat-feedback").text("Emails Match!");
+      $("#email-repeat-feedback").text("");
     }
   });
 
   var passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/;
-  passwordInput.bind('input propertychange', function () {
+  passwordInput.focusout(function () {
     if (!passwordRegEx.test($(this).val())) {
       $("#password-form").removeClass("has-success");
-
       $("#password-form").addClass("has-error");
       $("#password-feedback").text("Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character and must be at least 8 characters long.");
-    } else {
-      $("#password-form").removeClass("has-error");
+      passwordValid == false;
+    } 
+    if (passwordInput.val().trim() !== repeatPasswordInput.val().trim()) {
+      $("#repeat-password-form").removeClass("has-success");
+      $("#repeat-password-form").addClass("has-error");
+      $("#repeat-password-feedback").text("Passwords Don't Match");
+    }
+  });
 
+  passwordInput.bind('input propertychange', function () {
+    if (passwordRegEx.test($(this).val())) {
+      $("#password-form").removeClass("has-error");
       $("#password-form").addClass("has-success");
-      $("#password-feedback").text("Password set correctly!");
+      $("#password-feedback").text("");
+      passwordValid == true;
+    }
+    if (passwordInput.val().trim() == repeatPasswordInput.val().trim()) {
+      $("#repeat-password-form").removeClass("has-error");
+      $("#repeat-password-form").addClass("has-success");
+      $("#repeat-password-feedback").text("");
+    }
+  });
+
+  repeatPasswordInput.focusout(function () {
+    if (passwordInput.val().trim() !== repeatPasswordInput.val().trim()) {
+      $("#repeat-password-form").removeClass("has-success");
+      $("#repeat-password-form").addClass("has-error");
+      $("#repeat-password-feedback").text("Passwords Don't Match");
     }
   });
 
   repeatPasswordInput.bind('input propertychange', function () {
-    if (passwordInput.val().trim() !== repeatPasswordInput.val().trim()) {
-      $("#repeat-password-form").removeClass("has-success");
-
-      $("#repeat-password-form").addClass("has-error");
-      $("#repeat-password-feedback").text("Passwords Don't Match");
-    } else {
+    if (passwordInput.val().trim() == repeatPasswordInput.val().trim()) {
       $("#repeat-password-form").removeClass("has-error");
-
       $("#repeat-password-form").addClass("has-success");
-      $("#repeat-password-feedback").text("Passwords Match!");
+      $("#repeat-password-feedback").text("");
     }
   });
 
@@ -172,10 +209,55 @@ $(document).ready(function () {
   signUpButton.on("click", function (event) {
 
     if ($("#restaurant-input").val() == "Select A Restaurant") {
+      $("#restaurant-feedback").text("Please select a restaurant");
       valid = false
-      $("#restaurant-feedback").text("");
+    }
+
+    if (usernameInput.val().trim().length < 2) {
+      $("#username-form").removeClass("has-success");
+      $("#username-form").addClass("has-error");
+      $("#username-feedback").text("User name must be at least 2 characters long");
+    }
+
+    if (addRestaurantInput.val().trim().length < 2 && $("#restaurant-input").val() == "Add More") {
+      $("#addRestaurant-form").removeClass("has-success");
+      $("#addRestaurant-form").addClass("has-error");
+      $("#addRestaurant-feedback").text("Restaurant name must be at least 2 characters long");
+    } 
+
+    if (firstnameInput.val().trim().length < 2) {
+      $("#firstname-form").removeClass("has-success");
+      $("#firstname-form").addClass("has-error");
+      $("#firstname-feedback").text("First name must be at least 2 characters long");
+    }
+
+    if (lastnameInput.val().trim().length < 1) {
+      $("#lastname-form").removeClass("has-success");
+      $("#lastname-form").addClass("has-error");
+      $("#lastname-feedback").text("Last name must be at least 1 characters long");
+    }
+
+    if (emailInput.val().trim().length < 1) {
+      $("#email-form").removeClass("has-success");
+      $("#email-form").addClass("has-error");
+      $("#email-feedback").text("Invalid Email");
 
     }
+    console.log(emailRegEx.test($(this).val()))
+    console.log(passwordRegEx.test($(this).val()))
+
+    if (passwordInput.val().trim().length < 1) {
+      $("#password-form").removeClass("has-success");
+      $("#password-form").addClass("has-error");
+      $("#password-feedback").text("Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character and must be at least 8 characters long.");
+    }
+
+    if (passwordInput.val().trim() !== repeatPasswordInput.val().trim()) {
+      $("#repeat-password-form").removeClass("has-success");
+      $("#repeat-password-form").addClass("has-error");
+      $("#repeat-password-feedback").text("Passwords Don't Match");
+    }
+
     // Replace all alerts with modals
 
     var restaurant;
