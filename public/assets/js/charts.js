@@ -342,6 +342,7 @@ function sum(arr) {
 
 $(document).ready(function () {
     var budgetArr = [];
+    var expenseArr = [];
 
     $.get("/api/query/", {
         table: "Budget",
@@ -368,10 +369,10 @@ $(document).ready(function () {
             var tempArr = sum(data.data);
 
             tempArr.forEach(e => {
-                budgetArr.push([e.departmentName, Number(e.expenseCost)]);
+                expenseArr.push([e.departmentName, Number(e.expenseCost)]);
             });
             // sum up all cate amt first before calling function
-            makePieChart(budgetArr, true, "Expense");
+            makePieChart(expenseArr, true, "Expense");
         } else if (data.status === 201) {
             console.log(data.msg);
         }
@@ -379,5 +380,6 @@ $(document).ready(function () {
 
     $(window).resize(function () {
         makePieChart(budgetArr, true, "Budget");
+        makePieChart(expenseArr, true, "Expense");
     });
 })
