@@ -40,6 +40,7 @@ $(document).ready(function () {
             }
             else {
                 console.log("yup")
+                console.log(Budget);
                 initializeRows(Budget);
             }
         });
@@ -97,7 +98,7 @@ $(document).ready(function () {
         var newRow = $("<tr>")
         var id = $("<td>").text(row.id)
         var department = $("<td>").text(row.departmentName)
-        var total = $("<td>").text(row.    )
+        var total = $("<td>").text(row.expenseCost)
         var start = $("<td>").text(row.dateStart)
         var end = $("<td>").text(row.dateExpired)
         var edit = $("<button>"); edit.addClass("editEntry"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalB"); edit.val(row.id); edit.text("Edit")
