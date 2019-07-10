@@ -59,52 +59,8 @@ app.use(function (err, req, res, next) {
         error: (app.get('env') === 'development') ? err : {}
     })
 });
-// ------------------------------
-
 // our module get's exported as app.
 // ------------------------------
 module.exports = app;
 
-
-// var express = require("express");
-
-// var app = express();
-// var PORT = 3000;
-
-// // Sets up the Express app to handle data parsing
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-
-// app.use(express.static("public"));
-
-// var exphbs = require("express-handlebars");
-
-// app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-// app.set("view engine", "handlebars");
-
-
-// // Serve index.handlebars to the root route, populated with all quote data.
-// app.get("/", function(req, res) {
-//     res.render("index");
-// });
-
-// app.get("/history", function(req, res) {
-//     res.render("history");
-// });
-
-// app.get("/add", function(req, res) {
-//     res.render("add");
-// });
-
-// app.get("/home", function(req, res) {
-//     res.render("home");
-// });
-
-
-
-// // Start our server so that it can begin listening to client requests.
-// app.listen(PORT, function() {
-//   // Log (server-side) when our server has started
-//   console.log("Server listening on: http://localhost:" + PORT);
-// });
 

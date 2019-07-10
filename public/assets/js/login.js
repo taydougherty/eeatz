@@ -16,12 +16,18 @@ $(document).ready(function () {
       usernameInputL.css("border", "solid 1px red");
       $("#usernameL-feedback").text("Please enter a username");
       return;
+    } else {
+      usernameInputL.css("border", "none");
+      $("#usernameL-feedback").text("");
     }
 
     if (!userData.password) {
       passwordInputL.css("border", "solid 1px red");
       $("#passwordL-feedback").text("Please enter a password");
       return;
+    } else {
+      passwordInputL.css("border", "none");
+      $("#passwordL-feedback").text("");
     }
 
 
@@ -36,13 +42,11 @@ $(document).ready(function () {
     $.post("/users/login", {
       username: username,
       password: password
-    }).then(function (data) {
+    }).then(function(data) {
       window.location.replace(data);
       // If there's an error, log the error
-    })
-    // .catch(function (err) {
-    //   $("#passwordL-feedback").text("Incorrect Username or Password");
-    // });
+    }).catch(function(err) {
+      $("#passwordL-feedback").text("Incorrect Username or Password");
+    });
   }
-
 });
