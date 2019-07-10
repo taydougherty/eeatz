@@ -3,11 +3,13 @@
 <div class="container">
 
     <ul class="nav nav-bordered mt-4 mt-md-2 mb-0 clearfix" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a href="#budget" class="nav-link active" role="tab" data-toggle="tab" aria-controls="budget">BUDGET</a>
+        <li class="nav-item " role="presentation">
+            <a href="#budget" id="bud-tab" class="nav-link active table-select" role="tab" data-toggle="tab"
+                aria-controls="budget">BUDGET</a>
         </li>
-        <li class="nav-item" role="presentation">
-            <a href="#expenses" class="nav-link" role="tab" data-toggle="tab" aria-controls="expenses">EXPENSES</a>
+        <li class="nav-item " role="presentation">
+            <a href="#expenses" id="exp-tab" class="nav-link table-select" role="tab" data-toggle="tab"
+                aria-controls="expenses">EXPENSES</a>
         </li>
     </ul>
 
@@ -362,10 +364,10 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="budget-table">
 
                     {{!-- Example entry --}}
-                    <tr>
+                    {{!-- <tr>
                         <td>1</td>
                         <td>Utilities</td>
                         <td>20000</td>
@@ -375,7 +377,7 @@
                                 data-target="#editEntryModalB">Edit</button>
                         </td>
 
-                    </tr>
+                    </tr> --}}
                     {{!-- rename this to whatever the table name ends up being --}}
                     {{!-- {{#each budget}}
                
@@ -403,7 +405,7 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="expenses-table">
 
                     {{!-- Example entry --}}
                     <tr>
@@ -429,3 +431,4 @@
 
 
 </div>
+<script src="/assets/js/history.js"></script>
