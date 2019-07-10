@@ -11,6 +11,7 @@ $(document).ready(function () {
 
   var repeatPasswordInput = $("input#repeat-password-input");
   var repeatEmailInput = $("input#repeat-email-input");
+  var valid;
 
   document.getElementById('restaurant-form').onchange = function () {
     if ($("#restaurant-input").val() == "Add More") {
@@ -33,6 +34,7 @@ $(document).ready(function () {
     }
     if ($("#restaurant-input").val() != "Select A Restaurant") {
       $("#restaurant-feedback").text("");
+      valid = true;
     }
     if ($("#restaurant-input").val() == "Select A Restaurant") {
       $("#restaurant-form").removeClass("has-success");
@@ -170,9 +172,8 @@ $(document).ready(function () {
   signUpButton.on("click", function (event) {
 
     if ($("#restaurant-input").val() == "Select A Restaurant") {
-      $("#restaurant-form").removeClass("has-success");
-      $("#restaurant-form").addClass("has-error");
-      $("#restaurant-feedback").text("Please select a restaurant.");
+      valid = false
+      $("#restaurant-feedback").text("");
 
     }
     // Replace all alerts with modals
@@ -201,24 +202,12 @@ $(document).ready(function () {
     console.log(passwordInput.val().trim())
     console.log(restaurant)
 
-    if (!userData.username || !userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.restaurantName) {
-      return alert("Please don't leave fields blank");
+    if (!userData.username || !userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.restaurantName || valid == false ) {
+      return alert("Please don't leave fields blank. Make sure you selected a restaurant.");
     }
 
     // If we have an email and password, run the signUpUser function
     signUpUser(userData.username, userData.firstName, userData.lastName, userData.email, userData.password, userData.restaurantName);
-    firstnameInput.val("");
-    lastnameInput.val("");
-    addRestaurantInput.val("");
-    emailInput.val("");
-    passwordInput.val("");
-    usernameInput.val("");
-    repeatPasswordInput.val("");
-    repeatEmailInput.val("");
-    $("#addrestaurant-form").addClass("display_node")
-    $('.option option').prop('selected', function () {
-      return this.defaultSelected;
-    });
   });
 
   // Does a post to the signup route. If succesful, we are redirected to the members page
@@ -232,10 +221,26 @@ $(document).ready(function () {
       password: password,
       restaurantName: restaurantName
     }).then(function (data) {
+
+
       if (data.duplicateUser) {
         // Replace with Modal
         alert("Sorry, that username has been taken");
       } else {
+
+        firstnameInput.val("");
+        lastnameInput.val("");
+        addRestaurantInput.val("");
+        emailInput.val("");
+        passwordInput.val("");
+        usernameInput.val("");
+        repeatPasswordInput.val("");
+        repeatEmailInput.val("");
+        $("#addrestaurant-form").addClass("display_node")
+        $('.option option').prop('selected', function () {
+          return this.defaultSelected;
+        });
+
         window.location = data.redirect;
       }
     })
