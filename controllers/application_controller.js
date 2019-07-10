@@ -1,4 +1,6 @@
 var db = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.index = function(req, res) {
     res.render('index');
@@ -7,20 +9,26 @@ exports.index = function(req, res) {
 // req.body.table       "Budget", "Expense"
 // req.body.headers     "categories, amount"
 exports.allQuery = function (req, res) {
-    if (req.body.table === "Expense") {
+    if (req.query.table === "Expense") {
         var database = db.expenses;
-    } else if (req.body.table === "Budget") {
+        var dateControl = {
+            dateOccurred: {
+                [Op.lt]: (new Date())
+            }
+        }
+    } else if (req.query.table === "Budget") {
         var database = db.budgets;
+        var dateControl = {
+            dateExpired: {
+                [Op.gt]: (new Date())
+            }
+        }
     }
 
-    var attr = req.body.headers.split(", ");
+    var attr = req.query.headers.split(", ");
     database.findAll({
-        attributes: attr
-        // where: {
-        //     dateExpired: {
-        //         [Op.gt]: moment().toDate()
-        //     }
-        // }
+        attributes: attr,
+        where: dateControl
     }).then(function (data) {
         if (data.length > 0) {
             res.json({
