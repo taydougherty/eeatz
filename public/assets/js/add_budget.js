@@ -129,10 +129,12 @@ $(document).ready(function () {
         }
 
         console.log(department);
-
+        // regex to remove commas
+        budgetTotal = (budgetAmountInputB.val().trim()).replace(",", "");
+        
         var userDataB = {
             departmentName: department,
-            budgetTotal: budgetAmountInputB.val().trim(),
+            budgetTotal: budgetTotal,
             // dateStart: moment(),
             dateExpired: expirationDateInputB.val().trim()
         };
