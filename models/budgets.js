@@ -4,26 +4,26 @@ module.exports = (sequelize, DataTypes) => {
   const budget = sequelize.define('budgets', {
     departmentName: {
       type: DataTypes.STRING,
-      allowNull:false,
+      allowNull:true,
       validate: {
         len: [1]
       }
     },
     budgetTotal: {
       type:DataTypes.DECIMAL(30, 2),
-      allowNull:false
+      allowNull:true
     },
     dateStart: {
       type:DataTypes.DATE,
-      allowNull:false
+      allowNull:true
     },
     dateExpired: {
       type:DataTypes.DATE,
-      allowNull:false
+      allowNull:true
     },
     username: {
       type: DataTypes.STRING,
-      allowNull:false,
+      allowNull:true,
       validate: {
         len: [1]
       }
