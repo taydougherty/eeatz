@@ -9,28 +9,28 @@ $(document).ready(function () {
     var expirationDateInputB = $("input#expirationDateB-input");
     var addCategoryNameInputB = $("input#addCategoryNameB-input");
 
-    // // Grab departmant names
-    // function budgetDepartmentNames() {
-    //     $.get("/add/budgetDropdown", function (data) {
-    //         departmentNames = data;
-    //         if (!departmentNames || (departmentNames.length = 0)) {
-    //             console.log("nope")
-    //         }
-    //         else {
-    //             console.log("yup")
-    //             fill(departmentNames);
-    //         }
-    //     });
-    // }
-    // function fill(departmentNames) {
-    //     console.log(departmentNames);
-    //     for (i = 0; i <departmentNames.data.length; i++) {
-    //         $("#departmentNameB-input").append($('<option>'+departmentNames.data[i].departmentName+'</option>'));
-    //         console.log(departmentNames.data[i].departmentName);
-    //     }
-    //     $("#departmentNameB-input").append($('<option>Add More</option>'));
-    // }
-    // budgetDepartmentNames();
+    // Grab departmant names
+    function budgetDepartmentNames() {
+        $.get("/add/budgetDropdown", function (data) {
+            departmentNames = data;
+            if (!departmentNames || (departmentNames.length = 0)) {
+                console.log("nope")
+            }
+            else {
+                console.log("yup")
+                fill(departmentNames);
+            }
+        });
+    }
+    function fill(departmentNames) {
+        console.log(departmentNames);
+        for (i = 0; i <departmentNames.data.length; i++) {
+            $("#departmentNameB-input").append($('<option>'+departmentNames.data[i].departmentName+'</option>'));
+            console.log(departmentNames.data[i].departmentName);
+        }
+        $("#departmentNameB-input").append($('<option>Add More</option>'));
+    }
+    budgetDepartmentNames();
 
     // Open and close add more input on Budget form
     document.getElementById('departmentNameB-form').onchange = function () {
