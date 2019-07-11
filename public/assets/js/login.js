@@ -4,7 +4,7 @@ $(document).ready(function () {
   var usernameInputL = $("input#usernameL-input");
   var passwordInputL = $("input#passwordL-input");
 
-// Username feedback
+  // Username feedback
   usernameInputL.bind('input propertychange', function () {
     $("#login-feedback").text("");
     $("#login-feedback").css("color", "");
@@ -20,21 +20,21 @@ $(document).ready(function () {
     }
   });
 
-// Password feedback
-passwordInputL.bind('input propertychange', function () {
-     $("#login-feedback").text("");
-     $("#login-feedback").css("color", "");
-  if (passwordInputL.val().trim().length >= 2) {
-    $("#passwordL-feedback").css("color", "");
-    $("#passwordL-feedback").text("");
-  }
-});
-passwordInputL.focusout(function () {
-  if (passwordInputL.val().trim().length < 2) {
-    $("#passwordL-feedback").text("Type your password");
-    $("#passwordL-feedback").css("color", "red");
-  }
-});
+  // Password feedback
+  passwordInputL.bind('input propertychange', function () {
+    $("#login-feedback").text("");
+    $("#login-feedback").css("color", "");
+    if (passwordInputL.val().trim().length >= 2) {
+      $("#passwordL-feedback").css("color", "");
+      $("#passwordL-feedback").text("");
+    }
+  });
+  passwordInputL.focusout(function () {
+    if (passwordInputL.val().trim().length < 2) {
+      $("#passwordL-feedback").text("Type your password");
+      $("#passwordL-feedback").css("color", "red");
+    }
+  });
 
   // When the form is submitted, we validate there's an email and password entered
   loginForm.on("submit", function (event) {

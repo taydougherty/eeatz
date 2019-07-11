@@ -52,7 +52,7 @@ $(document).ready(function () {
       $("#addRestaurant-form").removeClass("has-success");
       $("#addRestaurant-form").addClass("has-error");
       $("#addRestaurant-feedback").text("Restaurant name must be at least 2 characters long");
-    } 
+    }
   });
   addRestaurantInput.bind('input propertychange', function () {
     if (addRestaurantInput.val().trim().length >= 2) {
@@ -120,7 +120,7 @@ $(document).ready(function () {
       $("#email-form").addClass("has-error");
       $("#email-feedback").text("Invalid Email");
       emailValid == false
-    } 
+    }
     if (emailInput.val().trim() !== repeatEmailInput.val().trim()) {
       $("#email-repeat-form").removeClass("has-success");
       $("#email-repeat-form").addClass("has-error");
@@ -167,7 +167,7 @@ $(document).ready(function () {
       $("#password-form").addClass("has-error");
       $("#password-feedback").text("Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number, 1 special character and must be at least 8 characters long.");
       passwordValid == false;
-    } 
+    }
     if (passwordInput.val().trim() !== repeatPasswordInput.val().trim()) {
       $("#repeat-password-form").removeClass("has-success");
       $("#repeat-password-form").addClass("has-error");
@@ -223,7 +223,7 @@ $(document).ready(function () {
       $("#addRestaurant-form").removeClass("has-success");
       $("#addRestaurant-form").addClass("has-error");
       $("#addRestaurant-feedback").text("Restaurant name must be at least 2 characters long");
-    } 
+    }
 
     if (firstnameInput.val().trim().length < 2) {
       $("#firstname-form").removeClass("has-success");
@@ -284,7 +284,7 @@ $(document).ready(function () {
     console.log(passwordInput.val().trim())
     console.log(restaurant)
 
-    if (!userData.username || !userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.restaurantName || valid == false ) {
+    if (!userData.username || !userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.restaurantName || valid == false) {
       return alert("Please don't leave fields blank. Make sure you selected a restaurant.");
     }
 
