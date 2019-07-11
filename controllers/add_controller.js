@@ -53,3 +53,22 @@ exports.budgetDropdown = function (req, res) {
         }
     })
 }
+
+exports.expenseDropdown = function (req, res) {
+    db.expenses.findAll({
+        attributes: ['departmentName'],
+        group: ['departmentName']
+    }).then(function (data) {
+        if (data.length > 0) {
+            res.json({
+                status: 200,
+                data: data
+            });
+        } else {
+            res.json({
+                status: 201,
+                msg: "Cannot find any data"
+            });
+        }
+    })
+}

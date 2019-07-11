@@ -8,6 +8,8 @@ router.get('/',isAuthenticated, add_controller.index);
 
 router.get('/budgetDropdown', add_controller.budgetDropdown);
 
+router.get('/expenseDropdown', add_controller.expenseDropdown);
+
 router.post('/expenses', isAuthenticated, add_controller.createExpense);
 
 router.post('/budgets', isAuthenticated, add_controller.createBudget);

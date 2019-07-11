@@ -11,6 +11,29 @@ $(document).ready(function () {
     var expirationDateInputE = $("input#expirationDateE-input");
     var addCategoryNameInputE = $("input#addCategoryNameE-input");
 
+        // Grab departmant names
+        function expenseDepartmentNames() {
+            $.get("/add/expenseDropdown", function (data) {
+                departmentNames = data;
+                if (!departmentNames || (departmentNames.length = 0)) {
+                    console.log("nope")
+                }
+                else {
+                    console.log("yup")
+                    fill(departmentNames);
+                }
+            });
+        }
+        function fill(departmentNames) {
+            console.log(departmentNames);
+            for (i = 0; i <departmentNames.data.length; i++) {
+                $("#departmentNameE-input").append($('<option>'+departmentNames.data[i].departmentName+'</option>'));
+                console.log(departmentNames.data[i].departmentName);
+            }
+            $("#departmentNameE-input").append($('<option>Add More</option>'));
+        }
+        expenseDepartmentNames();
+
     // Open and close add more input on Expenses form
     document.getElementById('departmentNameE-form').onchange = function () {
         if ($("#departmentNameE-input").val() == "Add More") {
