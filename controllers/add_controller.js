@@ -1,11 +1,39 @@
 var db = require('../models');
 
-exports.index = function(req, res) {
+exports.index = function (req, res) {
     res.render('add/add', {
         layout: 'main'
     });
 };
 
+
+
+exports.createExpense = function (req, res) {
+    console.log(req.body);
+    db.expenses.create({
+        departmentName: req.body.departmentName,
+        expenseName: req.body.expenseName,
+        expenseCost: req.body.expenseCost,
+        dateOccurred: req.body.dateOccurred,
+        // need to add code to create pass in a user name
+        username: "username"
+    })
+};
+
+exports.createBudget = function (req, res) {
+    console.log(req.body);
+    db.budgets.create({
+
+        departmentName: req.body.departmentName,
+        budgetTotal: req.body.budgetTotal,
+        dateExpired: req.body.dateExpired,
+        // need to add code to create pass in a moment();
+        dateStart: 1,
+        // need to add code to create pass in a user name
+        username: "username"
+
+    })
+};
 
 exports.budgetDropdown = function (req, res) {
     db.budgets.findAll({

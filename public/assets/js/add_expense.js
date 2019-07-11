@@ -169,7 +169,7 @@ $(document).ready(function () {
             console.log("Form valid")
 
             // Add Expenses
-            $.post("/api/expenses", userDataE)
+            $.post("/add/expenses", userDataE)
                 .then(function (data) {
                     console.log("add.html", data);
                     alert("Espense Added!");
