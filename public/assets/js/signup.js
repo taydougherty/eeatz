@@ -15,6 +15,30 @@ $(document).ready(function () {
   var passwordValid;
   var emailValid;
 
+  // get existing restaurant names 
+  // id for dropdown is restaurant-input
+  function restaurantDropdown() {
+    $.get("/users/restaurantdropdown", function (data) {
+        restaurantNames = data;
+        if (!restaurantNames || (restaurantNames.length = 0)) {
+            console.log("nope")
+        }
+        else {
+            console.log("yup")
+            fill(restaurantNames);
+        }
+    });
+}
+function fill(restaurantNames) {
+    console.log(restaurantNames);
+    for (i = 0; i <restaurantNames.data.length; i++) {
+        $("#restaurant-input").append($('<option>'+restaurantNames.data[i].restaurantName+'</option>'));
+        console.log(restaurantNames.data[i].restaurantName);
+    }
+    $("#restaurant-input").append($('<option>Add More</option>'));
+}
+restaurantDropdown();
+
   document.getElementById('restaurant-form').onchange = function () {
     if ($("#restaurant-input").val() == "Add More") {
       $("#addRestaurant-form").removeClass("display_node");

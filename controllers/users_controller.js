@@ -47,3 +47,22 @@ exports.signUpUser = function(req,res) {
     }
   })
 };
+
+exports.restaurantDropdown = function (req, res) {
+  db.users.findAll({
+      attributes: ['restaurantName'],
+      group: ['restaurantName']
+  }).then(function (data) {
+      if (data.length > 0) {
+          res.json({
+              status: 200,
+              data: data
+          });
+      } else {
+          res.json({
+              status: 201,
+              msg: "Cannot find any data"
+          });
+      }
+  })
+}

@@ -13,4 +13,6 @@ router.post('/login', passport.authenticate("local"), users_controller.loginUser
 
 router.post('/signup', users_controller.signUpUser);
 
+router.get('/restaurantdropdown', users_controller.restaurantDropdown);
+
 module.exports = router;
