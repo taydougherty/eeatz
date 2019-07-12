@@ -1,11 +1,7 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
     "password": "Dupn6hbe#",
-=======
-    "password": "FAMILIA-445",
->>>>>>> f42d0e91d3349b6d2fed6f4e910c82747f02242c
     "database": "eeatz",
     "host": "127.0.0.1",
     "dialect": "mysql",
