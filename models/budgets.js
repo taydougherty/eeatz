@@ -20,14 +20,15 @@ module.exports = (sequelize, DataTypes) => {
     dateExpired: {
       type:DataTypes.DATE,
       allowNull:true
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull:true,
-      validate: {
-        len: [1]
-      }
     }
+    // ,
+    // username: {
+    //   type: DataTypes.STRING,
+    //   allowNull:true,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // }
   });
   budget.associate = function(models) {
     // associations can be defined here
