@@ -31,11 +31,17 @@ $(document).ready(function () {
 }
 function fill(restaurantNames) {
     console.log(restaurantNames);
-    for (i = 0; i <restaurantNames.data.length; i++) {
-        $("#restaurant-input").append($('<option>'+restaurantNames.data[i].restaurantName+'</option>'));
-        console.log(restaurantNames.data[i].restaurantName);
+
+    if (restaurantNames) {
+      for (i = 0; i <restaurantNames.data.length; i++) {
+          $("#restaurant-input").append($('<option>'+restaurantNames.data[i].restaurantName+'</option>'));
+          console.log(restaurantNames.data[i].restaurantName);
+      }
+      $("#restaurant-input").append($('<option>Add More</option>'));
     }
-    $("#restaurant-input").append($('<option>Add More</option>'));
+    else {
+      $("#restaurant-input").append($('<option>Add More</option>'));
+    }
 }
 restaurantDropdown();
 

@@ -151,11 +151,13 @@ $(document).ready(function () {
         }
 
         console.log(department);
+        // remove commas
+        expenseCost = (expenseCostInputE.val().trim()).replace(",", "");
 
         var userDataE = {
             departmentName: department,
             expenseName: expenseNameInputE.val().trim(),
-            expenseCost: expenseCostInputE.val().trim(),
+            expenseCost: expenseCost,
             dateOccurred: expirationDateInputE.val().trim()
         };
 
