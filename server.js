@@ -14,6 +14,13 @@ let s3 = new aws.S3({
     secretAccessKey: process.env.S3_SECRET
 });
 
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+});
+
+client.connect();
+
 // Express settings
 // ================
 
