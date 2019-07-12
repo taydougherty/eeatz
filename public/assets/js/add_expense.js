@@ -89,13 +89,13 @@ $(document).ready(function () {
 
     // validation Expiration Date Expense
     expirationDateInputE.bind('input propertychange', function () {
-        if (expirationDateInputE.val().trim().length = 8 && expirationDateInputE.val().trim().split("-")[0] >= moment().year()) {
+        if (expirationDateInputE.val().trim().length = 8 && expirationDateInputE.val().trim().split("-")[0] <= moment().year()) {
             $("#expirationDateE-feedback").text("");
             valid = true;
         }
     });
     expirationDateInputE.focusout(function () {
-        if (expirationDateInputE.val().trim().length < 8 || expirationDateInputE.val().trim().split("-")[0] < moment().year()) {
+        if (expirationDateInputE.val().trim().length < 8 || expirationDateInputE.val().trim().split("-")[0] > moment().year()) {
             $("#expirationDateE-feedback").text("Please enter a valid date.");
             valid = false;
         }
@@ -138,7 +138,7 @@ $(document).ready(function () {
         }
 
         // validation Expiration Date Expense
-        if (expirationDateInputE.val().trim().length < 8 || expirationDateInputE.val().trim().split("-")[0] < moment().year()) {
+        if (expirationDateInputE.val().trim().length < 8 || expirationDateInputE.val().trim().split("-")[0] > moment().year()) {
             $("#expirationDateE-feedback").text("Please enter a valid date.");
             valid = false;
         }
