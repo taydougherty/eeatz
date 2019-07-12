@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const budget = sequelize.define('budgets', {
     departmentName: {
       type: DataTypes.STRING,
-      allowNull:true,
+      allowNull:false,
       validate: {
         len: [1]
       }
