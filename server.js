@@ -28,7 +28,7 @@ const config = require("./config/extra-config");
 const app = express();
 
 //allow sessions
-app.use(session({ secret: 'booty Mctootie', cookie: { maxAge: 60000 } }));
+app.use(session({ secret: 'booty Mctootie', cookie: { maxAge: 900000 } }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
