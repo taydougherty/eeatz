@@ -1,4 +1,4 @@
-# eeatz
+![eeatz: restaurant management software](https://user-images.githubusercontent.com/45830707/61162796-41228180-a4bf-11e9-8fe7-e39f550d4075.png)
 
 eeatz provides restaurant management software to family-owned multi-restaurant chains. eeatz allows owners and managers to access their budgets and expenses across restaurants in a sleek and modern visualization (versus a traditional clunky Excel spreedsheet).
 
