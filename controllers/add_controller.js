@@ -15,8 +15,6 @@ exports.createExpense = function (req, res) {
         expenseName: req.body.expenseName,
         expenseCost: req.body.expenseCost,
         dateOccurred: req.body.dateOccurred,
-        // need to add code to create pass in a user name
-        username: "username"
     })
 };
 
@@ -28,10 +26,7 @@ exports.createBudget = function (req, res) {
         budgetTotal: req.body.budgetTotal,
         dateExpired: req.body.dateExpired,
         // need to add code to create pass in a moment();
-        dateStart: 1,
-        // need to add code to create pass in a user name
-        username: "username"
-
+        // dateStart: 1,
     })
 };
 

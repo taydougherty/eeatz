@@ -26,11 +26,19 @@ $(document).ready(function () {
         }
         function fill(departmentNames) {
             console.log(departmentNames);
-            for (i = 0; i <departmentNames.data.length; i++) {
-                $("#departmentNameE-input").append($('<option>'+departmentNames.data[i].departmentName+'</option>'));
-                console.log(departmentNames.data[i].departmentName);
+
+            if (departmentNames.data === undefined) {
+
+                $("#departmentNameE-input").append($('<option>Add More</option>'));
             }
-            $("#departmentNameE-input").append($('<option>Add More</option>'));
+            else {
+                for (i = 0; i <departmentNames.data.length; i++) {
+                    $("#departmentNameE-input").append($('<option>'+departmentNames.data[i].departmentName+'</option>'));
+                    console.log(departmentNames.data[i].departmentName);
+                }
+                $("#departmentNameE-input").append($('<option>Add More</option>'));
+            }
+
         }
         expenseDepartmentNames();
 
@@ -151,11 +159,13 @@ $(document).ready(function () {
         }
 
         console.log(department);
+        // remove commas
+        expenseCost = (expenseCostInputE.val().trim()).replace(",", "");
 
         var userDataE = {
             departmentName: department,
             expenseName: expenseNameInputE.val().trim(),
-            expenseCost: expenseCostInputE.val().trim(),
+            expenseCost: expenseCost,
             dateOccurred: expirationDateInputE.val().trim()
         };
 
@@ -189,6 +199,8 @@ $(document).ready(function () {
         } else {
             return console.log("Form not valid")
         }
+
+        
     });
 
 });

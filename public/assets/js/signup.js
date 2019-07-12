@@ -31,11 +31,18 @@ $(document).ready(function () {
 }
 function fill(restaurantNames) {
     console.log(restaurantNames);
-    for (i = 0; i <restaurantNames.data.length; i++) {
+    console.log(restaurantNames.data)
+    if (restaurantNames.data === undefined) {
+      
+      $("#restaurant-input").append($('<option>Add More</option>'));
+    }
+    else {
+      for (i = 0; i <restaurantNames.data.length; i++) {
         $("#restaurant-input").append($('<option>'+restaurantNames.data[i].restaurantName+'</option>'));
         console.log(restaurantNames.data[i].restaurantName);
     }
     $("#restaurant-input").append($('<option>Add More</option>'));
+    }
 }
 restaurantDropdown();
 
