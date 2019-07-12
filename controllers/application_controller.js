@@ -11,24 +11,28 @@ exports.index = function(req, res) {
 exports.allQuery = function (req, res) {
     if (req.query.table === "Expense") {
         var database = db.expenses;
-        var dateControl = {
+        var dataControl = {
             dateOccurred: {
                 [Op.lt]: (new Date())
             }
         }
     } else if (req.query.table === "Budget") {
         var database = db.budgets;
-        var dateControl = {
+        var dataControl = {
             dateExpired: {
                 [Op.gt]: (new Date())
             }
         }
     }
 
+    if (req.query.name) {
+        dataControl.departmentName = req.query.name;
+    }
+
     var attr = req.query.headers.split(", ");
     database.findAll({
         attributes: attr,
-        where: dateControl
+        where: dataControl
     }).then(function (data) {
         if (data.length > 0) {
             res.json({
