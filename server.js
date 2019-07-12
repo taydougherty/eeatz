@@ -7,19 +7,19 @@ const session = require('express-session');
 const passport = require("./config/passport");
 const config = require("./config/extra-config");
 
-const aws = require('aws-sdk');
+// const aws = require('aws-sdk');
 
-let s3 = new aws.S3({
-    accessKeyId: process.env.S3_KEY,
-    secretAccessKey: process.env.S3_SECRET
-});
+// let s3 = new aws.S3({
+//     accessKeyId: process.env.S3_KEY,
+//     secretAccessKey: process.env.S3_SECRET
+// });
 
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-});
+// const client = new Client({
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: true,
+// });
 
-client.connect();
+// client.connect();
 
 // Express settings
 // ================
