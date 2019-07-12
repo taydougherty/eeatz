@@ -26,11 +26,19 @@ $(document).ready(function () {
         }
         function fill(departmentNames) {
             console.log(departmentNames);
-            for (i = 0; i <departmentNames.data.length; i++) {
-                $("#departmentNameE-input").append($('<option>'+departmentNames.data[i].departmentName+'</option>'));
-                console.log(departmentNames.data[i].departmentName);
+
+            if (departmentNames.data === undefined) {
+
+                $("#departmentNameE-input").append($('<option>Add More</option>'));
             }
-            $("#departmentNameE-input").append($('<option>Add More</option>'));
+            else {
+                for (i = 0; i <departmentNames.data.length; i++) {
+                    $("#departmentNameE-input").append($('<option>'+departmentNames.data[i].departmentName+'</option>'));
+                    console.log(departmentNames.data[i].departmentName);
+                }
+                $("#departmentNameE-input").append($('<option>Add More</option>'));
+            }
+
         }
         expenseDepartmentNames();
 
