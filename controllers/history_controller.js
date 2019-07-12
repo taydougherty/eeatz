@@ -53,6 +53,5 @@ exports.budgetEditEntry = function (req, res) {
         }
     ).then(function () {
         console.log("asdf")
-        location.reload(true)
     })
 }
