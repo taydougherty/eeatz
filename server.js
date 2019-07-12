@@ -7,12 +7,12 @@ const session = require('express-session');
 const passport = require("./config/passport");
 const config = require("./config/extra-config");
 
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-});
+const aws = require('aws-sdk');
 
-client.connect();
+let s3 = new aws.S3({
+    accessKeyId: process.env.S3_KEY,
+    secretAccessKey: process.env.S3_SECRET
+});
 
 // Express settings
 // ================
