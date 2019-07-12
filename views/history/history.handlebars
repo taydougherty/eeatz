@@ -280,7 +280,7 @@
                     </div>
                     <div class="form-group">
                         <label for="editBudTotal">Department Budget</label>
-                        <input type="number" class="form-control" id="editBudTotal" placeholder="20000">
+                        <input type="number" class="form-control" id="editBudTotal" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="editAddDateB">Date Added</label>
@@ -303,38 +303,33 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filterHeader">Edit Entry:</h5>
+                    <h5 class="modal-title" id="editHeaderE">Edit Entry:</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="RestE">Restaurant</label>
-                        <select id="RestE" class="form-control">
-                            <option>1</option>
+                        <label for="editCatE">Category</label>
+                        <select id="editCatE" class="form-control">
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="editCatE">Category</label>
-                        <select id="editCatE" class="form-control">
+                        <label for="editSubCatE">Sub-Category</label>
+                        <input type="text" class="form-control" id="editSubCatE" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="SubCategoryE">Sub-Category</label>
-                        <input type="text" class="form-control" id="SubCategoryE" placeholder="Wate">
+                        <label for="editCostE">Expenses</label>
+                        <input type="decimal" class="form-control" id="editCostE" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label for="ExpensesE">Expenses</label>
-                        <input type="decimal" class="form-control" id="ExpensesE" placeholder="3425.86">
-                    </div>
-                    <div class="form-group">
-                        <label for="DateAddedE">Date Added</label>
-                        <input type="date" class="form-control" id="DateAddedE" placeholder="">
+                        <label for="editAddDateE">Date Added</label>
+                        <input type="datetime-local" class="form-control" id="editAddDateE" placeholder="">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="editSubmitE">Submit</button>
                 </div>
             </div>
         </div>
@@ -350,7 +345,7 @@
 
                 <thead>
                     <tr>
-                        <th scope="col">Restaurant</th>
+                        <th scope="col">Entry#</th>
                         <th scope="col">Category</th>
                         <th scope="col">Department Budget</th>
                         <th scope="col">Date Added</th>
@@ -374,9 +369,9 @@
 
                 <thead>
                     <tr>
-                        <th scope="col">Restaurant</th>
+                        <th scope="col">Entry#</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Subcategory</th>
+                        <th scope="col">Sub-category</th>
                         <th scope="col">Expenses</th>
                         <th scope="col">Date</th>
                         <th scope="col"></th>
