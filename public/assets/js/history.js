@@ -27,8 +27,8 @@ $(document).ready(function () {
     })
 
     function getBudget(filterBudget) {
+        $("#budget-table").empty()
         console.log(table)
-        console.log("asdasdsa")
         var filterString = filterBudget || "";
         if (filterString) {
             filterString = "/filter/" + filterString;
@@ -66,9 +66,9 @@ $(document).ready(function () {
 
 
     function initializeRows(data) {
+        console.log(table)
         if (table === "budget") {
             var budData = data
-            $("#budget-table").empty()
             for (var i = 0; i < budData.data.length; i++) {
                 $("#budget-table").append(newBudgetRow(data.data[i]))
             }
@@ -89,19 +89,19 @@ $(document).ready(function () {
         var total = $("<td>").text(row.budgetTotal)
         var start = $("<td>").text(row.dateStart)
         var end = $("<td>").text(row.dateExpired)
-        var edit = $("<button>"); edit.addClass("editEntry"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalB"); edit.val(row.id); edit.text("Edit")
+        var edit = $("<button>"); edit.addClass("editEntry"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalB"); edit.val(row.id); edit.text("Edit"); edit.attr("data", JSON.stringify(row))
         newRow.append(id, department, total, start, end, edit)
         return newRow
     }
     function newExpenseRow(row) {
-
         var newRow = $("<tr>")
         var id = $("<td>").text(row.id)
         var department = $("<td>").text(row.departmentName)
         var total = $("<td>").text(row.expenseCost)
         var start = $("<td>").text(row.dateStart)
         var end = $("<td>").text(row.dateExpired)
-        var edit = $("<button>"); edit.addClass("editEntry"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalB"); edit.val(row.id); edit.text("Edit")
+        var edit = $("<button>"); edit.addClass("editEntry"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalE"); edit.val(row); edit.id(row.id); edit.text("Edit"); edit.attr("restID", row.id); edit.attr("dept", row.departmentName); edit.attr("cost", row.expenseCost); edit.attr("startD", row.dateStart); edit.attr("expDate", row.dateExpired);
+        console.log(edit)
         newRow.append(id, department, total, start, end, edit)
         return newRow
     }
@@ -110,21 +110,78 @@ $(document).ready(function () {
         getBudget()
     }
     onLoad()
+    $(document.body).on("click", ".editEntry", function () {
+        var entry = JSON.parse($(this).attr("data"))
+        $("#editHeaderB").text("Editing Entry#" + entry.id)
+        $("#editCatB").val(entry.departmentName)
+        $("#editBudTotal").val(entry.budgetTotal)
+        $("#editAddDateB").val(entry.dateStart.replace("Z", ""))
+        $("#editExpDateB").val(entry.dateExpired.replace("Z", ""))
+    })
+    $("#editSubmitB").on("click", function (event) {
+        event.preventDefault();
+        var id = ($("#editHeaderB").text()).split("Editing Entry#")[1]
+        console.log(id)
+        var departmentName = $("#editCatB").val()
+        var budgetTotal = $("#editBudTotal").val()
+        var dateStart = $("#editAddDateB").val()
+        var dateExpired = $("#editExpDateB").val()
+        var newEntry = {
+            id: id,
+            departmentName: departmentName,
+            budgetTotal: budgetTotal,
+            dateStart: dateStart,
+            dateExpired: dateExpired
+        }
+        $.ajax({
+            method: "PUT",
+            url: "/history/budgets/editEntry",
+            data: newEntry
+        }).then(
+            $("#budget-table").empty(),
+            getBudget()
+        );
+
+    })
+
+    function budgetDepartmentNames() {
+        $.get("/history/budgetDropdown", function (data) {
+            departmentNames = data;
+            if (!departmentNames || (departmentNames.length = 0)) {
+                console.log("nope")
+            }
+            else {
+                console.log("yup")
+                fillBudDept(departmentNames);
+            }
+        });
+    }
+    function fillBudDept(departmentNames) {
+        console.log(departmentNames);
+        for (i = 0; i < departmentNames.data.length; i++) {
+            $("#editCatB").append($('<option>' + departmentNames.data[i].departmentName + '</option>'));
+            console.log(departmentNames.data[i].departmentName);
+        }
+        // $("#editCatB").append($('<option>Add More</option>'));
+    }
+
+    // budgetRestNames()
+    budgetDepartmentNames();
+
+
+
+
+    // A function to check if its on budget or expenses tab
+
+    // A function to delete the table and remake it according to filters
+    // A function for editing the entries via the modal
+
+
+
+
+
+
+
+
+
 })
-
-
-
-
-// A function to check if its on budget or expenses tab
-
-// A function to delete the table and remake it according to filters
-// A function for editing the entries via the modal
-
-
-
-
-
-
-
-
-
