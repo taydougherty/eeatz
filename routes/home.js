@@ -6,4 +6,6 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 router.get('/',isAuthenticated, home_controller.home);
 
+router.get("/api/query/", home_controller.allQuery);
+
 module.exports = router;
