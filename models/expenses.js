@@ -1,13 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const expenses = sequelize.define('expenses', {
-    restaurantId: {
-      type:DataTypes.INTEGER,
-      allowNull:true,
-      validate: {
-        len: [1]
-      }
-    },
+    // restaurantId: {
+    //   type:DataTypes.INTEGER,
+    //   allowNull:true,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // },
     restaurantName: {
       type:DataTypes.STRING,
       allowNull:true,
@@ -36,14 +36,15 @@ module.exports = (sequelize, DataTypes) => {
     dateOccurred: {
       type:DataTypes.DATE,
       allowNull:true
-    },
-    username: {
-      type:DataTypes.STRING,
-      allowNull:true,
-      validate: {
-        len: [1]
-      }
     }
+    // ,
+    // username: {
+    //   type:DataTypes.STRING,
+    //   allowNull:true,
+    //   validate: {
+    //     len: [1]
+    //   }
+    // }
   }, {});
   expenses.associate = function(models) {
     // associations can be defined here
