@@ -199,6 +199,8 @@ $(document).ready(function () {
         } else {
             return console.log("Form not valid")
         }
+
+        
     });
 
 });

@@ -12,11 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     budgetTotal: {
       type:DataTypes.DECIMAL(30, 2),
       allowNull:true
-    },
-    dateStart: {
-      type:DataTypes.DATE,
-      allowNull:true
-    },
+    }
+    // ,
+    // dateStart: {
+    //   type:DataTypes.DATE,
+    //   allowNull:true
+    // }
+    ,
     dateExpired: {
       type:DataTypes.DATE,
       allowNull:true
