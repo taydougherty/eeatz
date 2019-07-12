@@ -8,6 +8,9 @@ $(document).ready(function () {
     var budgetAmountInputB = $("input#budgetAmountB-input");
     var expirationDateInputB = $("input#expirationDateB-input");
     var addCategoryNameInputB = $("input#addCategoryNameB-input");
+    var dateincurreInputB = $("input#dateincurreB-input");
+
+    
 
     // Grab departmant names
     function budgetDepartmentNames() {
@@ -85,6 +88,21 @@ $(document).ready(function () {
         }
     });
 
+     // validation Expiration Date Bufget
+     dateincurreInputB.bind('input propertychange', function () {
+        if (dateincurreInputB.val().trim().length = 8 && dateincurreInputB.val().trim().split("-")[0] >= moment().year()) {
+            $("#dateincurreB-feedback").text("");
+            valid = true;
+        }
+    });
+    dateincurreInputB.focusout(function () {
+        if (dateincurreInputB.val().trim().length < 8 || dateincurreInputB.val().trim().split("-")[0] < moment().year()) {
+            $("#dateincurreB-feedback").text("Please enter a valid date.");
+            valid = false;
+        }
+    });
+
+
     // Add Category Name Budget
     addCategoryNameInputB.bind('input propertychange', function () {
         if (departmentNameInputB.val().trim() == "Add More" && addCategoryNameInputB.val().trim().length >= 3) {
@@ -121,6 +139,12 @@ $(document).ready(function () {
             valid = false;
         }
 
+         // validation dateincurreInputB
+         if (dateincurreInputB.val().trim().length < 8 || dateincurreInputB.val().trim().split("-")[0] < moment().year()) {
+            $("#dateincurreB-feedback").text("Please enter a valid date.");
+            valid = false;
+        }
+        
         // validation AddCategory Name Budget
         if (departmentNameInputB.val() == "Add More" && addCategoryNameInputB.val().trim().length < 3) {
             $("#addCategoryNameB-feedback").text("Department name must be at least 3 characters long.");
@@ -143,12 +167,12 @@ $(document).ready(function () {
         var userDataB = {
             departmentName: department,
             budgetTotal: budgetTotal,
-            // dateStart: moment(),
+            dateStart: dateincurreInputB.val().trim(),
             dateExpired: expirationDateInputB.val().trim()
         };
-
-        // User Data Test
-        // if (!userData.departmentName || userData.departmentName == "Select A Department" || !userData.budgetTotal || !userData.dateExpired) {
+        
+        // // User Data Test
+        // if (!userData.departmentName || userData.departmentName == "Select A Department" || !userData.budgetTotal || !userData.dateStart || !userData.dateExpired) {
         //   return alert("Please don't leave fields blank");
         // }
 
@@ -168,6 +192,7 @@ $(document).ready(function () {
             budgetAmountInputB.val("");
             expirationDateInputB.val("");
             addCategoryNameInputB.val("");
+            dateincurreInputB.val("");
             $("#addCategoryNameB-form").addClass("display_node")
             $('.option option').prop('selected', function () {
                 return this.defaultSelected;
