@@ -7,6 +7,13 @@ const session = require('express-session');
 const passport = require("./config/passport");
 const config = require("./config/extra-config");
 
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+});
+
+client.connect();
+
 // Express settings
 // ================
 
@@ -14,7 +21,7 @@ const config = require("./config/extra-config");
 const app = express();
 
 //allow sessions
-app.use(session({ secret: 'booty Mctootie', cookie: { maxAge: 60000 }}));
+app.use(session({ secret: 'booty Mctootie', cookie: { maxAge: 60000 } }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
