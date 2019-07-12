@@ -13,7 +13,12 @@ function makePieChart(arr, name) {
     // First check if parameter is passed in correctly
     if (name !== "Budget" && name !== "Expense") {
         console.log("Wrong paramter was passed into function. Please use either 'Budget' or 'Expense'.")
-        return ""
+        return "";
+    }
+
+    if (arr.length < 1) {
+        console.log("No data is returned");
+        return "";
     }
 
     google.charts.load("current", { packages: ["corechart"] });
@@ -143,13 +148,18 @@ function makePercentageBar(arr, name, totalBudget) {
 
     //Get the percentage number
     var cost = 0;
-    arr.forEach(function (element) {
-        cost += parseFloat(element.expenseCost);
-    });
-    var perc = cost/parseFloat(totalBudget)*100;
-    
-    if (perc > 100) {
-        perc = 100;
+
+    if (arr.length > 0 ) {
+        arr.forEach(function (element) {
+            cost += parseFloat(element.expenseCost);
+        });
+        var perc = cost/parseFloat(totalBudget)*100;
+        
+        if (perc > 100) {
+            perc = 100;
+        }
+    } else {
+        var perc = 0;
     }
 
     //Local data
@@ -157,27 +167,30 @@ function makePercentageBar(arr, name, totalBudget) {
 
     var tempArr = [];
 
-    arr.forEach(e => {
-        tempArr.push([e.expenseName.trim(), e.expenseCost]);
-    });
+    if (arr.length > 0) {
+        arr.forEach(e => {
+            tempArr.push([e.expenseName.trim(), e.expenseCost]);
+        });
+    
+        var tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function (d) {
+            tempArr.sort(function(a, b) {return b[1] - a[1]});
+            var sum = 0;
+            var html = "";
+            tempArr.forEach(e => {
+                sum += e[1];
+            })
+            if (sum < totalBudget) {
+                sum = totalBudget;
+            }
+            tempArr.forEach(e => {
+                html += "<strong>" + e[0] + ": </strong><span class='details'>$" + e[1].toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + " --------> " + (e[1]/sum*100).toFixed(2) + "% of used expense<br></span>"
+            })
+            return html;
+        });
+    
+        svg.call(tip);
+    }
 
-    var tip = d3.tip().attr('class', 'd3-tip').offset([-10, 0]).html(function (d) {
-        tempArr.sort(function(a, b) {return b[1] - a[1]});
-        var sum = 0;
-        var html = "";
-        tempArr.forEach(e => {
-            sum += e[1];
-        })
-        if (sum < totalBudget) {
-            sum = totalBudget;
-        }
-        tempArr.forEach(e => {
-            html += "<strong>" + e[0] + ": </strong><span class='details'>$" + e[1].toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + " --------> " + (e[1]/sum*100).toFixed(2) + "% of used expense<br></span>"
-        })
-        return html;
-    });
-
-    svg.call(tip);
 
     //Draw the chart
     ready(data);
@@ -269,7 +282,7 @@ function makePercentageBar(arr, name, totalBudget) {
 
         //Appends main bar labels   
         var barLabels = labelGroup.append("text")
-            .text(function (d) { return d.num + "%"; })
+            .text(function (d) { return d.num.toFixed(3) + "%"; })
             .attr("x", function (d) {
                 if (minX > 32) {
                     return xScale(d.num) - 37;
@@ -375,7 +388,7 @@ $(document).ready(function () {
     var budgetArr = [];
     var expenseArr = [];
 
-    $.get("/api/query/", {
+    $.get("/home/api/query/", {
         table: "Budget",
         headers: "departmentName, budgetTotal"
     }).then(function (data) {
@@ -392,7 +405,7 @@ $(document).ready(function () {
         }
     });
 
-    $.get("/api/query/", {
+    $.get("/home/api/query/", {
         table: "Expense",
         headers: "departmentName, expenseCost"
     }).then(function (data) {
@@ -415,7 +428,7 @@ $(document).ready(function () {
         var numItem = budgetArr.length-1;
         budgetArr.forEach(e => {
     
-            $.get("/api/query/", {
+            $.get("/home/api/query/", {
                 table: "Expense",
                 headers: "expenseName, expenseCost",
                 name: e[0]
