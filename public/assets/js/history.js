@@ -27,7 +27,6 @@ $(document).ready(function () {
     })
 
     function getBudget(filterBudget) {
-        $("#budget-table").empty()
         console.log(table)
         var filterString = filterBudget || "";
         if (filterString) {
@@ -44,6 +43,7 @@ $(document).ready(function () {
                 initializeRows(Budget);
             }
         });
+        budgetDepartmentNames()
     }
     function getExpense(filterExpense) {
         console.log(table)
@@ -62,13 +62,14 @@ $(document).ready(function () {
                 initializeRows(Expense);
             }
         });
+        expenseDepartmentNames()
     }
-
 
     function initializeRows(data) {
         console.log(table)
         if (table === "budget") {
             var budData = data
+            $("#budget-table").empty()
             for (var i = 0; i < budData.data.length; i++) {
                 $("#budget-table").append(newBudgetRow(data.data[i]))
             }
@@ -89,7 +90,7 @@ $(document).ready(function () {
         var total = $("<td>").text(row.budgetTotal)
         var start = $("<td>").text(row.dateStart)
         var end = $("<td>").text(row.dateExpired)
-        var edit = $("<button>"); edit.addClass("editEntry"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalB"); edit.val(row.id); edit.text("Edit"); edit.attr("data", JSON.stringify(row))
+        var edit = $("<button>"); edit.addClass("editEntryB"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalB"); edit.val(row.id); edit.text("Edit"); edit.attr("data", JSON.stringify(row))
         newRow.append(id, department, total, start, end, edit)
         return newRow
     }
@@ -97,12 +98,12 @@ $(document).ready(function () {
         var newRow = $("<tr>")
         var id = $("<td>").text(row.id)
         var department = $("<td>").text(row.departmentName)
-        var total = $("<td>").text(row.expenseCost)
-        var start = $("<td>").text(row.dateStart)
-        var end = $("<td>").text(row.dateExpired)
-        var edit = $("<button>"); edit.addClass("editEntry"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalE"); edit.val(row); edit.id(row.id); edit.text("Edit"); edit.attr("restID", row.id); edit.attr("dept", row.departmentName); edit.attr("cost", row.expenseCost); edit.attr("startD", row.dateStart); edit.attr("expDate", row.dateExpired);
+        var subcat = $("<td>").text(row.expenseName)
+        var cost = $("<td>").text(row.expenseCost)
+        var date = $("<td>").text(row.dateOccurred)
+        var edit = $("<button>"); edit.addClass("editEntryE"); edit.attr("data-toggle", "modal"); edit.attr("data-target", "#editEntryModalE"); edit.val(row.id); edit.text("Edit"); edit.attr("data", JSON.stringify(row))
         console.log(edit)
-        newRow.append(id, department, total, start, end, edit)
+        newRow.append(id, department, subcat, cost, date, edit)
         return newRow
     }
     function onLoad() {
@@ -110,13 +111,21 @@ $(document).ready(function () {
         getBudget()
     }
     onLoad()
-    $(document.body).on("click", ".editEntry", function () {
+    $(document.body).on("click", ".editEntryB", function () {
         var entry = JSON.parse($(this).attr("data"))
         $("#editHeaderB").text("Editing Entry#" + entry.id)
         $("#editCatB").val(entry.departmentName)
         $("#editBudTotal").val(entry.budgetTotal)
         $("#editAddDateB").val(entry.dateStart.replace("Z", ""))
         $("#editExpDateB").val(entry.dateExpired.replace("Z", ""))
+    })
+    $(document.body).on("click", ".editEntryE", function () {
+        var entry = JSON.parse($(this).attr("data"))
+        $("#editHeaderE").text("Editing Entry#" + entry.id)
+        $("#editCatE").val(entry.departmentName)
+        $("#editSubCatE").val(entry.expenseName)
+        $("#editCostE").val(entry.expenseCost)
+        $("#editAddDateE").val(entry.dateOccurred.replace("Z", ""))
     })
     $("#editSubmitB").on("click", function (event) {
         event.preventDefault();
@@ -137,12 +146,38 @@ $(document).ready(function () {
             method: "PUT",
             url: "/history/budgets/editEntry",
             data: newEntry
-        }).then(
-            $("#budget-table").empty(),
+        }).then(function (data) {
+            console.log("update", data);
             getBudget()
-        );
+        });
 
     })
+    $("#editSubmitE").on("click", function (event) {
+        event.preventDefault();
+        var id = ($("#editHeaderE").text()).split("Editing Entry#")[1]
+        console.log(id)
+        var departmentName = $("#editCatE").val()
+        var expenseName = $("#editSubCatE").val()
+        var expenseCost = $("#editCostE").val()
+        var dateOccurred = $("#editAddDateE").val()
+        var newEntry = {
+            id: id,
+            departmentName: departmentName,
+            expenseName: expenseName,
+            expenseCost: expenseCost,
+            dateOccurred: dateOccurred
+        }
+        $.ajax({
+            method: "PUT",
+            url: "/history/expenses/editEntry",
+            data: newEntry
+        }).then(function (data) {
+            getExpense()
+        });
+
+    })
+
+
 
     function budgetDepartmentNames() {
         $.get("/history/budgetDropdown", function (data) {
@@ -164,9 +199,28 @@ $(document).ready(function () {
         }
         // $("#editCatB").append($('<option>Add More</option>'));
     }
-
+    function expenseDepartmentNames() {
+        $.get("/history/expenseDropdown", function (data) {
+            departmentNames = data;
+            if (!departmentNames || (departmentNames.length = 0)) {
+                console.log("nope")
+            }
+            else {
+                console.log("yup")
+                fillExpDept(departmentNames);
+            }
+        });
+    }
+    function fillExpDept(departmentNames) {
+        console.log(departmentNames);
+        for (i = 0; i < departmentNames.data.length; i++) {
+            $("#editCatE").append($('<option>' + departmentNames.data[i].departmentName + '</option>'));
+            console.log(departmentNames.data[i].departmentName);
+        }
+        // $("#editCatB").append($('<option>Add More</option>'));
+    }
     // budgetRestNames()
-    budgetDepartmentNames();
+    ;
 
 
 
