@@ -23,7 +23,7 @@ app.set('port', PORT);
 // (thus creating the apropos tables)
 // db.sequelize.sync().then(function () {
 // set our app to listen to the port we set above
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync().then(function () {
   var server = app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
