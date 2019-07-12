@@ -24,9 +24,8 @@ exports.createBudget = function (req, res) {
 
         departmentName: req.body.departmentName,
         budgetTotal: req.body.budgetTotal,
-        dateExpired: req.body.dateExpired,
-        // need to add code to create pass in a moment();
-        // dateStart: 1,
+        dateStart: req.body.dateStart,
+        dateExpired: req.body.dateExpired
     })
 };
 
